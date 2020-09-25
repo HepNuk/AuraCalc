@@ -322,7 +322,7 @@ var globalAura = {
 
 	FLESH_AND_STONE: { cost: 25, aura: true, title: "Flesh and Stone" },
 	BLOOD_AND_SAND: { cost: 10, buff: true, title: "Blood and Sand" },
-	ARCTIC: { cost: 25, buff: true, title: "Arctic Armour", override: arcticCalc } 
+	ARCTIC: { cost: 25, buff: true, title: "Arctic Armour", override: arcticCalc }, 
 	
 	PRIDE: { cost: 50, aura: true, title: "Pride" },
     WAR_BANNER: { cost: 10, aura: true, banner: true, can_drop: true, title: "War Banner", override: bannerCalc },
