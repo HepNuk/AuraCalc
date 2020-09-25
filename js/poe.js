@@ -4,6 +4,7 @@ var aurasEncode = [
     ['PRECISION', 5],
     ['ASPECT', 3],
     ['REDUCED_MANA', 7],
+	['AWAKENED_BLASPHEMY', 3],
     ['BLASPHEMY', 3],
     ['ENLIGHTEN', 4],
     ['BLOOD_GEM', 5],
@@ -140,7 +141,6 @@ String.prototype.reverse = function() {
 }
 
 var globalTmp = {}
-
 /* http://www.pathofexile.com/forum/view-thread/567561/page/3 */
 var calculateAura = function(aura, reducedMana = 0, lessMana = [], multiplier = 100) {
   var base = Math.floor(aura * (multiplier / 100))
@@ -221,7 +221,6 @@ var bannerCalc = function(pl) {
   }
   return calculateAura(pl.rootScope.AURAS[pl.aura].cost, pl.localReducedMana, pl.globalLessMana, pl.localMutliplier)
 }
-
 
 //Cluster Sections 
 
@@ -314,7 +313,7 @@ var globalAura = {
 	
 	PURITY_ELEMENTS: { cost: 35, aura: true, title: "Purity of Elements" },
 	ENVY: { cost: 50, aura: true, item: true, title: "Envy", description: "Granted by United in Dream Cutlass" },
-	ASPECT: { cost: 25, buff: true, title: "Aspect", singleImg: true, max: 4, number: true, description: "There are currently 4 aspect auras introduced in bestiary: cat, avian, spider, and crab" },
+	ASPECT: { cost: 25, buff: true, title: "Aspect", singleImg: true, description: "There are currently 4 aspect auras introduced in bestiary: cat, avian, spider, and crab" },
 	
 	CLARITY: { flat: [0, 34, 48, 61, 76, 89, 102, 115, 129, 141, 154, 166, 178, 190, 203, 214, 227, 239, 251, 265, 279, 293, 303, 313, 323, 333, 343, 353, 363, 373, 383, 383], title: "Clarity", aura: true, number: true, max: 30 },
 	PRECISION: { flat: [0, 22, 32, 40, 50, 59, 68, 76, 86, 94, 102, 110, 118, 126, 135, 142, 151, 159, 167, 176, 186, 195, 202, 208, 215, 222, 228, 235, 242, 248, 255], title: "Precision", aura: true, number: true, max: 30, override: precisionCalc },
@@ -333,8 +332,9 @@ var globalAura = {
     HERALD_ICE: { cost: 25, buff: true, title: "Herald of Ice", override: heraldCalc },
     HERALD_PURITY: { cost: 25, buff: true, title: "Herald of Purity", override: heraldCalc },
     HERALD_THUNDER: { cost: 25, buff: true, title: "Herald of Thunder", override: heraldCalc },
-	SKITTERBOTS: { cost: 35, biff: true, title: "Sitterbots" },
-	BLASPHEMY: { cost: 35, title: "Blasphemy", singleImg: true, max: 7, number: true, override: blasphemyCalc, description: "The ingame curse limit is 6, each aura stacked has a mana reservation override of 35%" }
+	SKITTERBOTS: { cost: 35, buff: true, title: "Sitterbots" },
+	BLASPHEMY: { cost: 35, title: "Blasphemy", singleImg: true, max: 10, number: true, override: blasphemyCalc, description: "The ingame curse limit is 6, each aura stacked has a mana reservation override of 35%" },
+	AWAKENED_BLASPHEMY: { cost: 32, title: "Awakened Blasphemy", singleImg: true, max: 10, number: true, override: blasphemyCalc, description: "The ingame curse limit is 6, each aura stacked has a mana reservation override of 32% (Level 5-6 Gem)" }
 	
 }
 
