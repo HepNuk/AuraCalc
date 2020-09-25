@@ -81,13 +81,13 @@
 					<label>
 						<img src="img/reduced_mana.png">
 						<abbr title="The ingame maximum from skill tree is currently 38% (40% with MotM)">%Reduced from Tree</abbr>
-						<input type="number" data-default="0" class="fr" ng-disabled="viewing" ng-model="settings['reducedMana']" ng-change="recalc()" min="0" max="80" value="0" placeholder="0" name="rms"><div class="cr"></div>
+						<input type="number" data-default="0" class="fr" ng-disabled="viewing" ng-model="settings['reducedMana']" ng-change="recalc()" min="0" max="100" value="0" placeholder="0" name="rms"><div class="cr"></div>
 					</label>
 				</div>
 				<div class="col-sm-6 col-md-4" ng-class="{ edited: settings['amuletRMR'] }">
 					<label>
 						<img src="img/rare_amu.png">
-						<abbr title="The ingame maximum from skill tree is currently 38% (40% with MotM)">%Reduced from Amulet</abbr>
+						<abbr title="Most amulets are 6% (12% for legacy)">%Reduced from Amulet</abbr>
 						<input type="number" data-default="0" class="fr" ng-disabled="viewing" ng-model="settings['amuletRMR']" ng-change="recalc()" min="0" max="12" value="0" placeholder="0" name="amy"><div class="cr"></div>
 					</label>
 				</div>
