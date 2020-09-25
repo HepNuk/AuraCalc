@@ -12,6 +12,7 @@ var aurasEncode = [
   ],
   [
     // add new things up here
+	['SKITTERBOTS', 1],
     ['PRIDE', 1],
     ['FLESH_AND_STONE', 1],
     ['MARCH_OF_LEGION', 1],
@@ -332,6 +333,7 @@ var globalAura = {
     HERALD_ICE: { cost: 25, buff: true, title: "Herald of Ice", override: heraldCalc },
     HERALD_PURITY: { cost: 25, buff: true, title: "Herald of Purity", override: heraldCalc },
     HERALD_THUNDER: { cost: 25, buff: true, title: "Herald of Thunder", override: heraldCalc },
+	SKITTERBOTS: { cost: 24, biff: true, title: "Sitterbots" },
     ARCTIC: { cost: 25, buff: true, title: "Arctic Armour", override: arcticCalc } 
 }
 
