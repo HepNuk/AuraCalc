@@ -368,15 +368,15 @@ var globalItem = [{
     MASTERMIND_DISCORD: { reduced: 25, title: "Mastermind of Discord", special: true, description: "From the Elementalist Ascendancy, only applies to heralds" },
     SANCTUARY_OF_THOUGHT: { less: 10, title: "Sanctuary of Thought", description: "From the Hierophant Ascendancy" }
   }, {
-	PURE_MIGHT: { reduced: 30, title: "Pure Might", special: true},
-	PURE_GUILE: { reduced: 30, title: "Pure Guile", special: true},
-	PURE_APT: { reduced: 30, title: "Pure Aptitude", special: true},
+	PURE_MIGHT: { reduced: 30, title: "Pure Might", special: true, description: "30% Reduced reservation of Purity of Fire"},
+	PURE_GUILE: { reduced: 30, title: "Pure Guile", special: true, description: "30% Reduced reservation of Purity of Ice"},
+	PURE_APT: { reduced: 30, title: "Pure Aptitude", special: true, description: "30% Reduced reservation of Purity of Lightning"},
 
-	SELF_CONTROL: { reduced: 30, title: "Self-Control", special: true},
-	SUBLIME_FORM: { reduced: 30, title: "Sublime Form", special: true},
-	UNCOMPROMISING: { reduced: 30, title: "Uncompromising", special: true},
+	SELF_CONTROL: { reduced: 30, title: "Self-Control", special: true, description: "30% Reduced reservation of Discipline"},
+	SUBLIME_FORM: { reduced: 30, title: "Sublime Form", special: true, description: "30% Reduced reservation of Grace"},
+	UNCOMPROMISING: { reduced: 30, title: "Uncompromising", special: true, description: "30% Reduced reservation of Determination"},
 	
-	MASTER_COMMAND: { reduced: 50, title: "Master of Command", special: true},
+	MASTER_COMMAND: { reduced: 50, title: "Master of Command", special: true, description: "50% Reduced reservation of Banners"},
   }, {
     ALPHAS_HOWL: { reduced: 8, type: "HELM", title: "Alpha's Howl" },
 	MASK_TRIBUNAL: { reduced: 0, special: true, type: "HELM", title: "Mask of the Tribunal", description: "Adds 1% reduced mana per 250 to all stats. Add the number manually to reduced mana field"},
