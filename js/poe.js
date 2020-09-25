@@ -320,9 +320,9 @@ var globalAura = {
 	PRECISION: { flat: [0, 22, 32, 40, 50, 59, 68, 76, 86, 94, 102, 110, 118, 126, 135, 142, 151, 159, 167, 176, 186, 195, 202, 208, 215, 222, 228, 235, 242, 248, 255], title: "Precision", aura: true, number: true, max: 30, override: precisionCalc },
     VITALITY: { flat: [0, 28, 40, 51, 63, 74, 85, 96, 108, 118, 128, 138, 148, 158, 169, 178, 189, 199, 209, 221, 233, 244, 253, 261, 269, 278, 286, 294, 303, 311, 319], title: "Vitality", aura: true, number: true, max: 30 },
 
-    BLASPHEMY: { cost: 35, title: "Blasphemy", singleImg: true, max: 7, number: true, override: blasphemyCalc, description: "The ingame curse limit is 6, each aura stacked has a mana reservation override of 35%" },
-    FLESH_AND_STONE: { cost: 25, aura: true, title: "Flesh and Stone" },
+	FLESH_AND_STONE: { cost: 25, aura: true, title: "Flesh and Stone" },
 	BLOOD_AND_SAND: { cost: 10, buff: true, title: "Blood and Sand" },
+	ARCTIC: { cost: 25, buff: true, title: "Arctic Armour", override: arcticCalc } 
 	
 	PRIDE: { cost: 50, aura: true, title: "Pride" },
     WAR_BANNER: { cost: 10, aura: true, banner: true, can_drop: true, title: "War Banner", override: bannerCalc },
@@ -334,7 +334,8 @@ var globalAura = {
     HERALD_PURITY: { cost: 25, buff: true, title: "Herald of Purity", override: heraldCalc },
     HERALD_THUNDER: { cost: 25, buff: true, title: "Herald of Thunder", override: heraldCalc },
 	SKITTERBOTS: { cost: 35, biff: true, title: "Sitterbots" },
-    ARCTIC: { cost: 25, buff: true, title: "Arctic Armour", override: arcticCalc } 
+	BLASPHEMY: { cost: 35, title: "Blasphemy", singleImg: true, max: 7, number: true, override: blasphemyCalc, description: "The ingame curse limit is 6, each aura stacked has a mana reservation override of 35%" }
+	
 }
 
 var globalLocalItem = {
