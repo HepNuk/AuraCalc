@@ -2,13 +2,14 @@ var aurasEncode = [
   [
     // add new things up here
     ['PRECISION', 5],
-    ['ASPECT', 3],
+    ['ASPECT', 1],
     ['REDUCED_MANA', 7],
 	['AWAKENED_BLASPHEMY', 3],
     ['BLASPHEMY', 3],
     ['ENLIGHTEN', 4],
     ['BLOOD_GEM', 5],
     ['CLARITY', 5],
+	['VITALITY', 5],
     ['MULTIPLIER', 10]
   ],
   [
@@ -41,7 +42,6 @@ var aurasEncode = [
 	['SHIELD_TEN', 1],
 	['SHIELD_FIF', 1],
     ['WRATH', 1],
-    ['VITALITY', 1],
     ['ARCTIC', 1],
     ['PURITY_LIGHTNING', 1],
     ['PURITY_ICE', 1],
