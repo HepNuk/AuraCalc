@@ -1,0 +1,331 @@
+/* Shortcut classes */
+.fl{float:left;}
+.fr{float:right;}
+.cb{clear:both;}
+.cl{clear:left;}
+.cr{clear:right;}
+.db{display:block;}
+.di{display:inline;}
+.ib{display:inline-block;}
+.dn{display:none;}
+.po{cursor:pointer;}
+.tc{text-align:center;}
+.tr{text-align:right;}
+.tl{text-align:left;}
+.np{padding:0;}
+.nm{margin:0;}
+.ab{position:absolute;}
+.rl{position:relative;}
+.fx{position:fixed;}
+.oh{overflow:hidden;}
+.oa{overflow:auto;}
+.oy{overflow-y:scroll}
+.b,strong{font-weight:700;}
+.i,em{font-style:italic;}
+.m{margin:10px}
+.mb{margin-bottom:10px;}
+.mt{margin-top:10px;}
+.ml{margin-left:10px;}
+.mr{margin-right:10px;}
+.ma{margin:0 auto;}
+.p{padding:10px;}
+.pb{padding-bottom:10px;}
+.pt{padding-top:10px;}
+.pl{padding-left:10px;}
+.pr{padding-right:10px;}
+.md{vertical-align:middle}
+.nw{white-space:nowrap;}
+.zt{z-index:100}
+.zb{z-index:-100}
+.tp{top:0}
+.lf{left:0}
+.rg{right:0}
+.bm{bottom:0}
+.min{width:1%;}
+.max{width:100%;}
+
+h1,h2,h3,h4,h5,h6 { color: #fff;}
+h3 { margin-top: 10px; }
+h4 { margin: 0; }
+
+#loading {
+  margin: 0 auto;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  height: 80px;
+  width: 400px;
+  margin: 0 0 -40px -200px;
+  text-align: center;
+  font-size: 30px;
+  font-weight: bold;
+}
+
+#loading small {
+  display: block;
+  font-size: 14px;
+}
+
+#container {
+  display: none;
+}
+
+/* Bubbles */
+.bubble {
+  width: 200px;
+  height: 250px;
+  background-repeat: no-repeat;
+  background-position: 0 50px;
+  position: relative;
+  margin: 10px;
+  text-align: center;
+  font-weight: bold;
+}
+
+.bubble div {
+  width: 200px;
+  position: absolute;
+  z-index: 1;
+  top: 50px;
+  height: 0px;
+}
+.error {
+  color: red;
+}
+
+#hp {
+  background-image: url("../img/globe_hp.png");
+  float: left;
+}
+
+#hp div {
+  background-image: url("../img/globe_r_hp.png");
+}
+
+#mana {
+  background-image: url("../img/globe_mana.png");
+  float: right;
+}
+#mana.blood {
+  background-image: url("../img/globe_empty.png");
+}
+#mana div {
+  background-image: url("../img/globe_r_mana.png");
+}
+#viewing {
+  display: none;
+}
+.viewing #viewing {
+  display: block !important;
+}
+.viewing .aura-grp .itemBlock:not(.edited) {
+  display: none;
+}
+.viewing input[type=checkbox],
+.viewing .aura-grp button,
+.viewing #add,
+.viewing #reset {
+  display: none;
+}
+
+#footer {
+  text-align: center;
+  width: 100%;
+  font-size: 16px;
+  line-height: 30px;
+}
+#footer a i {
+  font-size: 18px;
+}
+
+#footer a:hover i {
+  color: #56DCF2;
+}
+
+.row {
+  margin: 0;
+  border: 1px solid #ccc;
+  -moz-border-radius: 10px;
+  -webkit-border-radius: 10px;
+  border-radius: 10px;
+  -khtml-border-radius: 10px;
+  margin-bottom: 10px;
+}
+
+.row h3 {
+  padding: 0 10px;
+}
+/* Form labels */
+label {
+  color: #bbb;
+  display: block;
+  font-size: 16px;
+  background: #111;
+  cursor: pointer;
+  cursor: hand;
+  line-height: 35px;
+}
+label .reserved, label .reserved-mana, label .multi {
+  font-weight: normal;
+  font-style: italic;
+  float: right;
+  padding-right: 10px;
+  color: #BBDEFB;
+}
+
+div.bm label .reserved, div.bm label .reserved-mana, div.bm .multi {
+  color: #f44336;
+}
+.notViewing label.disabled {
+  color: #555;
+}
+.notViewing label.disabled .reserved,
+.notViewing label.disabled .reserved-mana,
+.notViewing label.disabled .multi,
+label.dim .reserved,
+label.dim .reserved-mana {
+  color: #7986CB;
+}
+.notViewing div.bm label.disabled .reserved,
+.notViewing div.bm label.disabled .reserved-mana,
+.notViewing div.bm label.disabled .multi,
+div.bm label.dim .reserved,
+div.bm label.dim .reserved-mana {
+  color: #800;
+}
+.edited label {
+  text-decoration: none !important;
+  background: #2B4463;
+  color: #fff !important;
+}
+.edited .reserved, .edited .reserved-mana, .edited .multi {
+  color: #E3F2FD !important;
+}
+div.bm.edited .reserved,
+div.bm.edited .reserved-mana,
+div.bm.edited .multi,
+div.bm .edited .reserved,
+div.bm .edited .reserved-mana,
+div.bm .edited .multi {
+  color: #ef9a9a !important;
+}
+#info div.class {
+}
+#info div.class .inner {
+  padding-left: 125px;
+  background: #111;
+  min-height: 60px;
+  position: relative;
+}
+#info img {
+  position: absolute;
+  left: 0;
+  top: 0;
+}
+label img {
+  width: 35px;
+  height: 35px;
+  float: left;
+  margin-right: 5px;
+}
+label input[type=number] {
+  border: 1px solid #ccc;
+  background: #222;
+  font-size: 14px;
+  color: #fff;
+  line-height: 25px;
+  padding: 0 2px;
+  width: 60px;
+}
+label input[type=number].fr {
+  margin-top: 3px;
+  margin-right: 3px;
+  width: 90px;
+}
+
+label.disabled input[type=number] {
+  border: 1px solid #777;
+}
+label.disabled input[type=number] {
+  border: 1px solid #777;
+}
+#final {
+  border: 0;
+  margin-bottom: 15px;
+}
+#aura_1 .del {
+  display: none;
+}
+.btn-primary:hover, .btn-primary:focus {
+  background-color: #2d6ca2 !important;
+  background-image: linear-gradient(to bottom,#428bca 0,#2d6ca2 100%) !important;
+  background-position: 0 -15px;
+}
+.advanced {
+  display: none;
+}
+.aura-grp input[type=text] {
+  background: none;
+  border: none;
+  color: #fff;
+  width: 80%;
+}
+.btn-warning:hover, .btn-warning:focus {
+  background-color: #b26a04 !important;
+  background-image: -webkit-linear-gradient(#804d03, #9e5f04 40%, #b26a04) !important;
+}
+.selected {
+  text-decoration:line-through;
+}
+#fixed_footer {
+  background: black;
+  border-top: 1px solid #ccc;
+  font-size: 14px;
+  height: 21px;
+  display: none;
+  bottom: 0;
+  width: 100%;
+  left: 0;
+  position: fixed;
+  font-weight: bold;
+  padding: 0 3px;
+  z-index: 99;
+}
+#hp_f {
+  float: left;
+  color: #F29494;
+}
+#mana_f {
+  color: #94A5F2;
+  float: right;
+}
+
+@media (max-width: 768px) {
+ #footer {
+  clear: both;
+  padding: 10px;
+ }
+ .bubble {
+  float: none !important;
+  margin: 30px auto 0 auto;
+ }
+}
+
+@media (max-width: 1650px) {
+ #fixed_footer {
+  display: block;
+ }
+}
+
+@media (min-width: 1650px) {
+  #hp {
+    position: fixed;
+    left: 10px;
+    bottom: 10px;
+  }
+  #mana {
+    position: fixed;
+    right: 10px;
+    bottom: 10px;
+  }
+}
