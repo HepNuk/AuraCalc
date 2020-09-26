@@ -2,16 +2,19 @@ var aurasEncode = [
   [
     // add new things up here
     ['PRECISION', 5],
-    ['ASPECT', 3],
+    ['ASPECT', 1],
     ['REDUCED_MANA', 7],
+	['AWAKENED_BLASPHEMY', 3],
     ['BLASPHEMY', 3],
     ['ENLIGHTEN', 4],
     ['BLOOD_GEM', 5],
     ['CLARITY', 5],
+	['VITALITY', 5],
     ['MULTIPLIER', 10]
   ],
   [
     // add new things up here
+	['SKITTERBOTS', 1],
     ['PRIDE', 1],
     ['FLESH_AND_STONE', 1],
     ['MARCH_OF_LEGION', 1],
@@ -39,7 +42,6 @@ var aurasEncode = [
 	['SHIELD_TEN', 1],
 	['SHIELD_FIF', 1],
     ['WRATH', 1],
-    ['VITALITY', 1],
     ['ARCTIC', 1],
     ['PURITY_LIGHTNING', 1],
     ['PURITY_ICE', 1],
@@ -58,10 +60,12 @@ var aurasEncode = [
 ]
 
 var settingsEncode = [
-  // add new things up here
+  // add new things up here 
+
   ['EGO', 1],
   ['INPIRATIONAL', 1],
   ['MASK_TRIBUNAL', 1],
+  
   ['HYRRI', 1],
   ['SAQAWALS_NEST', 1],
   ['MASTERMIND_DISCORD', 1],
@@ -81,11 +85,19 @@ var settingsEncode = [
   ['MORTAL_CONVICTION', 1],
   ['BLOOD_MAGIC', 1],
   ['SKYFORTH', 1],
+  ['PURE_GUILE', 1],
+  ['PURE_MIGHT', 1],
+  ['PURE_APT', 1],
+  ['SUBLIME_FORM', 1],
+  ['UNCOMPROMISING', 1],
+  ['SELF_CONTROL', 1],
+  ['MASTER_COMMAND', 1],
   ['reducedMana', 6],
-  ['amuletRMR', 6],
-  ['jewelRMR', 6],
+  ['amuletRMR', 4],
+  ['jewelRMR', 5],
   ['mana', 15],
-  ['life', 15]
+  ['life', 14]
+  
 ]
 
 var alpha = {
@@ -127,7 +139,6 @@ String.prototype.reverse = function() {
 }
 
 var globalTmp = {}
-
 /* http://www.pathofexile.com/forum/view-thread/567561/page/3 */
 var calculateAura = function(aura, reducedMana = 0, lessMana = [], multiplier = 100) {
   var base = Math.floor(aura * (multiplier / 100))
@@ -198,12 +209,88 @@ var precisionCalc = function(pl) {
   return calculateAura(flatCost, pl.localReducedMana, glm, pl.localMutliplier, true)
 }
 
+//Banners
 var bannerCalc = function(pl) {
   if(pl.rootScope.settings['INPIRATIONAL']) {
     return 0
   }
+  if(pl.rootScope.settings['MASTER_COMMAND'] == true) {
+    return calculateAura(pl.rootScope.AURAS[pl.aura].cost, pl.localReducedMana+50, pl.globalLessMana, pl.localMutliplier)
+  }
   return calculateAura(pl.rootScope.AURAS[pl.aura].cost, pl.localReducedMana, pl.globalLessMana, pl.localMutliplier)
 }
+
+//Cluster Sections 
+
+/**
+ * Purities 
+ */
+//Purity of Ice
+var iceCalc = function(pl) {
+	
+  if(pl.rootScope.settings['PURE_GUILE'] == true) {
+    return calculateAura(pl.rootScope.AURAS[pl.aura].cost, pl.localReducedMana+30, pl.globalLessMana, pl.localMutliplier)
+  }
+  
+  return calculateAura(pl.rootScope.AURAS[pl.aura].cost, pl.localReducedMana, pl.globalLessMana, pl.localMutliplier)
+}
+
+
+//Purity of Fire
+var fireCalc = function(pl) {
+	
+  if(pl.rootScope.settings['PURE_MIGHT'] == true) {
+    return calculateAura(pl.rootScope.AURAS[pl.aura].cost, pl.localReducedMana+30, pl.globalLessMana, pl.localMutliplier)
+  }
+  
+  return calculateAura(pl.rootScope.AURAS[pl.aura].cost, pl.localReducedMana, pl.globalLessMana, pl.localMutliplier)
+}
+
+//Purity of Lightning
+var lighCalc = function(pl) {
+	
+  if(pl.rootScope.settings['PURE_APT'] == true) {
+    return calculateAura(pl.rootScope.AURAS[pl.aura].cost, pl.localReducedMana+30, pl.globalLessMana, pl.localMutliplier)
+  }
+  
+  return calculateAura(pl.rootScope.AURAS[pl.aura].cost, pl.localReducedMana, pl.globalLessMana, pl.localMutliplier)
+}
+
+/**
+ * Defence Auras
+ */
+
+//Discipline
+var discCalc = function(pl) {
+	
+  if(pl.rootScope.settings['SELF_CONTROL'] == true) {
+    return calculateAura(pl.rootScope.AURAS[pl.aura].cost, pl.localReducedMana+30, pl.globalLessMana, pl.localMutliplier)
+  }
+  
+  return calculateAura(pl.rootScope.AURAS[pl.aura].cost, pl.localReducedMana, pl.globalLessMana, pl.localMutliplier)
+}
+
+//DETERMINATION
+var detCalc = function(pl) {
+	
+  if(pl.rootScope.settings['UNCOMPROMISING'] == true) {
+    return calculateAura(pl.rootScope.AURAS[pl.aura].cost, pl.localReducedMana+30, pl.globalLessMana, pl.localMutliplier)
+  }
+  
+  return calculateAura(pl.rootScope.AURAS[pl.aura].cost, pl.localReducedMana, pl.globalLessMana, pl.localMutliplier)
+}
+
+//Grace
+/*
+var graceCalc = function(pl) {
+	
+  if(pl.rootScope.settings['SUBLIME_FORM'] == true) {
+    return calculateAura(pl.rootScope.AURAS[pl.aura].cost, pl.localReducedMana+30, pl.globalLessMana, pl.localMutliplier)
+  }
+  
+  return calculateAura(pl.rootScope.AURAS[pl.aura].cost, pl.localReducedMana, pl.globalLessMana, pl.localMutliplier)
+}
+*/
 
 var globalAura = {
 	ANGER: { cost: 50, aura: true, title: "Anger" },
@@ -213,26 +300,27 @@ var globalAura = {
 	HASTE: { cost: 50, aura: true, title: "Haste" },
 	MALEVOLENCE: { cost: 50, aura: true, title: "Malevolence" },
 	ZEALOTRY: { cost: 50, aura: true, title: "Zealotry" },
+		
+	PURITY_FIRE: { cost: 35, aura: true, title: "Purity of Fire", override: fireCalc },
+    PURITY_ICE: { cost: 35, aura: true, title: "Purity of Ice", override: iceCalc },
+    PURITY_LIGHTNING: { cost: 35, aura: true, title: "Purity of Lightning", override: lighCalc },
 	
-	DISCIPLINE: { cost: 35, aura: true, title: "Discipline" },
-	GRACE: { cost: 50, aura: true, title: "Grace" },
-    DETERMINATION: { cost: 50, aura: true, title: "Determination" },
-	
-	PURITY_FIRE: { cost: 35, aura: true, title: "Purity of Fire" },
-    PURITY_ICE: { cost: 35, aura: true, title: "Purity of Ice" },
-    PURITY_LIGHTNING: { cost: 35, aura: true, title: "Purity of Lightning" },
+	DISCIPLINE: { cost: 35, aura: true, title: "Discipline", override: discCalc },
+	GRACE: { cost: 50, aura: true, title: "Grace"},
+    DETERMINATION: { cost: 50, aura: true, title: "Determination", override: detCalc },
+
 	
 	PURITY_ELEMENTS: { cost: 35, aura: true, title: "Purity of Elements" },
 	ENVY: { cost: 50, aura: true, item: true, title: "Envy", description: "Granted by United in Dream Cutlass" },
-	ASPECT: { cost: 25, buff: true, title: "Aspect", singleImg: true, max: 4, number: true, description: "There are currently 4 aspect auras introduced in bestiary: cat, avian, spider, and crab" },
+	ASPECT: { cost: 25, buff: true, title: "Aspect", singleImg: true, description: "There are currently 4 aspect auras introduced in bestiary: cat, avian, spider, and crab" },
 	
 	CLARITY: { flat: [0, 34, 48, 61, 76, 89, 102, 115, 129, 141, 154, 166, 178, 190, 203, 214, 227, 239, 251, 265, 279, 293, 303, 313, 323, 333, 343, 353, 363, 373, 383, 383], title: "Clarity", aura: true, number: true, max: 30 },
 	PRECISION: { flat: [0, 22, 32, 40, 50, 59, 68, 76, 86, 94, 102, 110, 118, 126, 135, 142, 151, 159, 167, 176, 186, 195, 202, 208, 215, 222, 228, 235, 242, 248, 255], title: "Precision", aura: true, number: true, max: 30, override: precisionCalc },
     VITALITY: { flat: [0, 28, 40, 51, 63, 74, 85, 96, 108, 118, 128, 138, 148, 158, 169, 178, 189, 199, 209, 221, 233, 244, 253, 261, 269, 278, 286, 294, 303, 311, 319], title: "Vitality", aura: true, number: true, max: 30 },
 
-    BLASPHEMY: { cost: 35, title: "Blasphemy", singleImg: true, max: 7, number: true, override: blasphemyCalc, description: "The ingame curse limit is 6, each aura stacked has a mana reservation override of 35%" },
-    FLESH_AND_STONE: { cost: 25, aura: true, title: "Flesh and Stone" },
+	FLESH_AND_STONE: { cost: 25, aura: true, title: "Flesh and Stone" },
 	BLOOD_AND_SAND: { cost: 10, buff: true, title: "Blood and Sand" },
+	ARCTIC: { cost: 25, buff: true, title: "Arctic Armour", override: arcticCalc }, 
 	
 	PRIDE: { cost: 50, aura: true, title: "Pride" },
     WAR_BANNER: { cost: 10, aura: true, banner: true, can_drop: true, title: "War Banner", override: bannerCalc },
@@ -243,7 +331,10 @@ var globalAura = {
     HERALD_ICE: { cost: 25, buff: true, title: "Herald of Ice", override: heraldCalc },
     HERALD_PURITY: { cost: 25, buff: true, title: "Herald of Purity", override: heraldCalc },
     HERALD_THUNDER: { cost: 25, buff: true, title: "Herald of Thunder", override: heraldCalc },
-    ARCTIC: { cost: 25, buff: true, title: "Arctic Armour", override: arcticCalc } 
+	SKITTERBOTS: { cost: 35, buff: true, title: "Sitterbots" },
+	BLASPHEMY: { cost: 35, title: "Blasphemy", singleImg: true, max: 10, number: true, override: blasphemyCalc, description: "The ingame curse limit is 6, each aura stacked has a mana reservation override of 35%" },
+	AWAKENED_BLASPHEMY: { cost: 32, title: "Awakened Blasphemy", singleImg: true, max: 10, number: true, override: blasphemyCalc, description: "The ingame curse limit is 6, each aura stacked has a mana reservation override of 32% (Level 5-6 Gem)" }
+	
 }
 
 var globalLocalItem = {
@@ -257,8 +348,8 @@ var globalLocalItem = {
 	VIVINSECT: { reduced: -10, type: "RING", title: "Vivinsect"},
 	
 	PRISM_GUARDIAN: { reduced: 25, type: "SHIELD", title: "Prism Guardian", bloodMagic: true },
-	SHIELD_TEN: { reduced: 10, type: "SHIELD", title: "Rare 10%"},
-	SHIELD_FIF: { reduced: 15, type: "SHIELD", title: "Rare 15%"},
+	SHIELD_TEN: { reduced: 10, type: "SHIELD", title: "Rare local 10% reduced "},
+	SHIELD_FIF: { reduced: 15, type: "SHIELD", title: "Rare local 15% reduced"},
 	
     //GENEROSITY: { multi: 100, title: "Generosity" },
 	THE_DEVOURING_DIADEM: { reduced: 20, type: "HELM", title: "The Devouring Diadem"},
@@ -277,13 +368,23 @@ var globalItem = [{
     EGO: { less: -50, title: "Supreme Ego" },
     INPIRATIONAL: { reduced: 100, special: true,  title: "Inpirational", description: "From the Champion Ascendancy, makes banner skills free" },
     MASTERMIND_DISCORD: { reduced: 25, title: "Mastermind of Discord", special: true, description: "From the Elementalist Ascendancy, only applies to heralds" },
-    SANCTUARY_OF_THOUGHT: { less: 10, title: "Sanctuary of Thought", description: "From the Hierophant Ascendancy" }
+    SANCTUARY_OF_THOUGHT: { less: 10, title: "Sanctuary of Thought", description: "From the Hierophant Ascendancy" },
+  }, {
+	PURE_MIGHT: { reduced: 30, title: "Pure Might", special: true, description: "30% Reduced reservation of Purity of Fire"},
+	PURE_GUILE: { reduced: 30, title: "Pure Guile", special: true, description: "30% Reduced reservation of Purity of Ice"},
+	PURE_APT: { reduced: 30, title: "Pure Aptitude", special: true, description: "30% Reduced reservation of Purity of Lightning"},
+
+	SELF_CONTROL: { reduced: 30, title: "Self-Control", special: true, description: "30% Reduced reservation of Discipline"},
+	SUBLIME_FORM: { reduced: 30, title: "Sublime Form", special: true, description: "30% Reduced reservation of Grace"},
+	UNCOMPROMISING: { reduced: 30, title: "Uncompromising", special: true, description: "30% Reduced reservation of Determination"},
+	
+	MASTER_COMMAND: { reduced: 50, title: "Master of Command", special: true, description: "50% Reduced reservation of Banners"},
   }, {
     ALPHAS_HOWL: { reduced: 8, type: "HELM", title: "Alpha's Howl" },
 	MASK_TRIBUNAL: { reduced: 0, special: true, type: "HELM", title: "Mask of the Tribunal", description: "Adds 1% reduced mana per 250 to all stats. Add the number manually to reduced mana field"},
 	MEMORY_VAULT: { reduced: -10, type: "HELM", title: "Memory Vault" },
-	RARE_RMR: { reduced: 5, type: "HELM", title: "Rare 5% RMR" },
-	RARE_DBL_RMR: { reduced: 10, type: "HELM", title: "Rare 10% RMR" },
+	RARE_RMR: { reduced: 5, type: "HELM", title: "Rare 5% redcued" },
+	RARE_DBL_RMR: { reduced: 10, type: "HELM", title: "Rare 10% reduced" },
   }, {
     CONQUERORS: { reduced: 2, title: "Conqueror's Efficiency" },
   }, {
@@ -903,11 +1004,14 @@ angular.module("poeAura", [])
 
   // Load from URL
   if(hash.length > 0) {
-    data = hash.split("/")
+    
+	data = hash.split("/")
     var bin = pad(alpha.decode(data[0]).toString(2), 65)
     var pos = 0
-
-    for(i=settingsEncode.length - 1; i >= 0; i--) {
+	
+	
+	
+	for(i=settingsEncode.length - 1; i >= 0; i--) {
 
       pos += settingsEncode[i][1]
       var bindata = parseInt(bin.substr((pos * -1 ? pos * -1 : 0), settingsEncode[i][1]).toString(), 2)
@@ -952,6 +1056,7 @@ angular.module("poeAura", [])
         }
       }
     }
+	
     $rootScope.life = $rootScope.settings['life']
     $rootScope.mana = $rootScope.settings['mana']
     $rootScope.viewing = true

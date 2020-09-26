@@ -60,22 +60,12 @@ var aurasEncode = [
 ]
 
 var settingsEncode = [
-  // add new things up here
-  ['CI', 1],
-  
-  ['PURE_GUILE', 1],
-  ['PURE_MIGHT', 1],
-  ['PURE_APT', 1],
-  
-  ['SUBLIME_FORM', 1],
-  ['UNCOMPROMISING', 1],
-  ['SELF_CONTROL', 1],
-  
-  ['MASTER_COMMAND', 1],
-  
+  // add new things up here 
+  [
   ['EGO', 1],
   ['INPIRATIONAL', 1],
   ['MASK_TRIBUNAL', 1],
+  
   ['HYRRI', 1],
   ['SAQAWALS_NEST', 1],
   ['MASTERMIND_DISCORD', 1],
@@ -95,11 +85,20 @@ var settingsEncode = [
   ['MORTAL_CONVICTION', 1],
   ['BLOOD_MAGIC', 1],
   ['SKYFORTH', 1],
-  ['reducedMana', 6],
-  ['amuletRMR', 6],
-  ['jewelRMR', 6],
+  ['PURE_GUILE', 1],
+  ['PURE_MIGHT', 1],
+  ['PURE_APT', 1],
+  ['SUBLIME_FORM', 1],
+  ['UNCOMPROMISING', 1],
+  ['SELF_CONTROL', 1],
+  ['MASTER_COMMAND', 1]
+  ],[
+  ['reducedMana', 7],
+  ['amuletRMR', 4],
+  ['jewelRMR', 5],
   ['mana', 15],
-  ['life', 15],
+  ['life', 15]
+  ]
 ]
 
 var alpha = {
@@ -283,6 +282,7 @@ var detCalc = function(pl) {
 }
 
 //Grace
+/*
 var graceCalc = function(pl) {
 	
   if(pl.rootScope.settings['SUBLIME_FORM'] == true) {
@@ -291,7 +291,7 @@ var graceCalc = function(pl) {
   
   return calculateAura(pl.rootScope.AURAS[pl.aura].cost, pl.localReducedMana, pl.globalLessMana, pl.localMutliplier)
 }
-
+*/
 
 var globalAura = {
 	ANGER: { cost: 50, aura: true, title: "Anger" },
@@ -307,7 +307,7 @@ var globalAura = {
     PURITY_LIGHTNING: { cost: 35, aura: true, title: "Purity of Lightning", override: lighCalc },
 	
 	DISCIPLINE: { cost: 35, aura: true, title: "Discipline", override: discCalc },
-	GRACE: { cost: 50, aura: true, title: "Grace", override: graceCalc},
+	GRACE: { cost: 50, aura: true, title: "Grace"},
     DETERMINATION: { cost: 50, aura: true, title: "Determination", override: detCalc },
 
 	
@@ -369,7 +369,7 @@ var globalItem = [{
     EGO: { less: -50, title: "Supreme Ego" },
     INPIRATIONAL: { reduced: 100, special: true,  title: "Inpirational", description: "From the Champion Ascendancy, makes banner skills free" },
     MASTERMIND_DISCORD: { reduced: 25, title: "Mastermind of Discord", special: true, description: "From the Elementalist Ascendancy, only applies to heralds" },
-    SANCTUARY_OF_THOUGHT: { less: 10, title: "Sanctuary of Thought", description: "From the Hierophant Ascendancy" }
+    SANCTUARY_OF_THOUGHT: { less: 10, title: "Sanctuary of Thought", description: "From the Hierophant Ascendancy" },
   }, {
 	PURE_MIGHT: { reduced: 30, title: "Pure Might", special: true, description: "30% Reduced reservation of Purity of Fire"},
 	PURE_GUILE: { reduced: 30, title: "Pure Guile", special: true, description: "30% Reduced reservation of Purity of Ice"},
@@ -951,7 +951,7 @@ angular.module("poeAura", [])
     if(!skipHash) {
       var bin = ""
       var hash = []
-
+/*
       // Encode settings
       for (let s in settingsEncode) {
         if(settingsEncode[s][1] == 1) {
@@ -961,8 +961,44 @@ angular.module("poeAura", [])
           bin += pad(($rootScope.settings[settingsEncode[s][0]] ? parseInt($rootScope.settings[settingsEncode[s][0]]) : 0).toString(2), settingsEncode[s][1])
         }
       }
+	  */
+	//for (let i in $rootScope.settings){
 
-      hash.push(alpha.encode(parseInt(bin,2)))
+		
+		var hashGroupS = []
+		for (let s in settingsEncode) {
+			
+			
+			var bin = ""
+			
+			for (let t in settingsEncode[s]){
+				
+
+				var value = null
+				
+				
+				if(settingsEncode[s][t][0]){
+				
+					value = $rootScope.settings[settingsEncode[s][t][0]]
+					
+				}
+				
+				if(settingsEncode[s][t][1] == 1){
+					bin += value ? 1 : 0
+					
+				} else {
+					bin += pad((value ? parseInt(value) : 0).toString(2), settingsEncode[s][t][1])
+					
+				}
+			}
+			hashGroupS.push(alpha.encode(parseInt(bin,2)))
+		}
+		hash.push(hashGroupS.join("."))
+		
+		
+	//}
+
+    //hash.push(alpha.encode(parseInt(bin,2)))
 
       // Encode each aura group
       for (let i in $rootScope.auraGroups) {
@@ -984,7 +1020,7 @@ angular.module("poeAura", [])
             {
               console.log('Could not find:', aurasEncode[a][b][0])
             }
-
+			 
             if(aurasEncode[a][b][1] == 1) {
               bin += value ? 1 : 0
             }
@@ -1005,21 +1041,38 @@ angular.module("poeAura", [])
 
   // Load from URL
   if(hash.length > 0) {
-    data = hash.split("/")
+    
+	data = hash.split("/")
     var bin = pad(alpha.decode(data[0]).toString(2), 65)
     var pos = 0
+	
+	var settData = data[0].split(".")	
+	console.log(settData)
+	
+	for(b=0; b <= settData.length -1; b++){
+		console.log(b)	
+		var bin = pad(alpha.decode(settData[b]).toString(2), 65)
+		var pos = 0
+		
+		
+		
+		for(i=settingsEncode[b].length - 1; i >= 0; i--) {
 
-    for(i=settingsEncode.length - 1; i >= 0; i--) {
+			pos += settingsEncode[b][i][1]
+			
+			
+			var bindata = parseInt(bin.substr((pos * -1 ? pos * -1 : 0), settingsEncode[b][i][1]).toString(), 2)
 
-      pos += settingsEncode[i][1]
-      var bindata = parseInt(bin.substr((pos * -1 ? pos * -1 : 0), settingsEncode[i][1]).toString(), 2)
-
-      if(settingsEncode[i][1] == 1) {
-        bindata = bindata ? true : false
-      }
-      $rootScope.settings[settingsEncode[i][0]] = bindata
-    }
-
+			if(settingsEncode[b][i][1] == 1) {
+			bindata = bindata ? true : false
+			
+			}
+			console.log(settingsEncode[b][i][0])
+			
+			$rootScope.settings[settingsEncode[b][i][0]] = bindata
+		}
+	
+	}
 
     $rootScope.auraGroups = []
     for(let i=0; i < data.length - 1; i++) {
@@ -1054,6 +1107,7 @@ angular.module("poeAura", [])
         }
       }
     }
+	
     $rootScope.life = $rootScope.settings['life']
     $rootScope.mana = $rootScope.settings['mana']
     $rootScope.viewing = true
