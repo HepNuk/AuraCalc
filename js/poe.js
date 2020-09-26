@@ -62,42 +62,41 @@ var aurasEncode = [
 var settingsEncode = [
   // add new things up here 
   [
-  ['EGO', 1],
-  ['INPIRATIONAL', 1],
-  ['MASK_TRIBUNAL', 1],
-  
-  ['HYRRI', 1],
-  ['SAQAWALS_NEST', 1],
-  ['MASTERMIND_DISCORD', 1],
-  ['MEMORY_VAULT', 1],
-  ['IMPRESENCE', 1],
-  ['CALAMITY', 1],
-  ['SANCTUARY_OF_THOUGHT', 1],
-  ['PERFECT_FORM', 1],
-  ['CONQUERORS', 1],
-  ['ICHIMONJI2', 1],
-  ['ICHIMONJI', 1],
-  ['MIDNIGHT_BARGAIN2', 1],
-  ['MIDNIGHT_BARGAIN', 1],
-  ['ALPHAS_HOWL', 1],
-  ['RARE_RMR', 1],
-  ['RARE_DBL_RMR', 1],
-  ['MORTAL_CONVICTION', 1],
-  ['BLOOD_MAGIC', 1],
-  ['SKYFORTH', 1],
-  ['PURE_GUILE', 1],
-  ['PURE_MIGHT', 1],
-  ['PURE_APT', 1],
-  ['SUBLIME_FORM', 1],
-  ['UNCOMPROMISING', 1],
-  ['SELF_CONTROL', 1],
-  ['MASTER_COMMAND', 1]
+	  ['EGO', 1],
+	  ['INPIRATIONAL', 1],
+	  ['MASK_TRIBUNAL', 1],	  
+	  ['HYRRI', 1],
+	  ['SAQAWALS_NEST', 1],
+	  ['MASTERMIND_DISCORD', 1],
+	  ['MEMORY_VAULT', 1],
+	  ['IMPRESENCE', 1],
+	  ['CALAMITY', 1],
+	  ['SANCTUARY_OF_THOUGHT', 1],
+	  ['PERFECT_FORM', 1],
+	  ['CONQUERORS', 1],
+	  ['ICHIMONJI2', 1],
+	  ['ICHIMONJI', 1],
+	  ['MIDNIGHT_BARGAIN2', 1],
+	  ['MIDNIGHT_BARGAIN', 1],
+	  ['ALPHAS_HOWL', 1],
+	  ['RARE_RMR', 1],
+	  ['RARE_DBL_RMR', 1],
+	  ['MORTAL_CONVICTION', 1],
+	  ['BLOOD_MAGIC', 1],
+	  ['SKYFORTH', 1],
+	  ['PURE_GUILE', 1],
+	  ['PURE_MIGHT', 1],
+	  ['PURE_APT', 1],
+	  ['SUBLIME_FORM', 1],
+	  ['UNCOMPROMISING', 1],
+	  ['SELF_CONTROL', 1],
+	  ['MASTER_COMMAND', 1]
   ],[
-  ['reducedMana', 7],
-  ['amuletRMR', 4],
-  ['jewelRMR', 5],
-  ['mana', 15],
-  ['life', 15]
+	  ['reducedMana', 7],
+	  ['amuletRMR', 4],
+	  ['jewelRMR', 5],
+	  ['mana', 15],
+	  ['life', 15]
   ]
 ]
 
@@ -182,6 +181,9 @@ var blasphemyCalc = function(pl) {
     + (calculateAura(pl.rootScope.AURAS[pl.aura].cost, localReducedMana, pl.globalLessMana, pl.localMutliplier) * (number - 1))
   }
   else {
+	  console.log("Cost: "+ pl.rootScope.AURAS[pl.aura].cost +" Local Red: "+ localReducedMana +" global less: "+ pl.globalLessMana +" loval multi: "+ pl.localMutliplier)
+	  console.log(calculateAura(pl.rootScope.AURAS[pl.aura].cost, localReducedMana, pl.globalLessMana, pl.localMutliplier))
+	  console.log(number)
     return calculateAura(pl.rootScope.AURAS[pl.aura].cost, localReducedMana, pl.globalLessMana, pl.localMutliplier) * number
   }
 }
@@ -282,7 +284,7 @@ var detCalc = function(pl) {
 }
 
 //Grace
-/*
+
 var graceCalc = function(pl) {
 	
   if(pl.rootScope.settings['SUBLIME_FORM'] == true) {
@@ -291,7 +293,7 @@ var graceCalc = function(pl) {
   
   return calculateAura(pl.rootScope.AURAS[pl.aura].cost, pl.localReducedMana, pl.globalLessMana, pl.localMutliplier)
 }
-*/
+
 
 var globalAura = {
 	ANGER: { cost: 50, aura: true, title: "Anger" },
@@ -307,7 +309,7 @@ var globalAura = {
     PURITY_LIGHTNING: { cost: 35, aura: true, title: "Purity of Lightning", override: lighCalc },
 	
 	DISCIPLINE: { cost: 35, aura: true, title: "Discipline", override: discCalc },
-	GRACE: { cost: 50, aura: true, title: "Grace"},
+	GRACE: { cost: 50, aura: true, title: "Grace", override: graceCalc},
     DETERMINATION: { cost: 50, aura: true, title: "Determination", override: detCalc },
 
 	
@@ -333,8 +335,9 @@ var globalAura = {
     HERALD_PURITY: { cost: 25, buff: true, title: "Herald of Purity", override: heraldCalc },
     HERALD_THUNDER: { cost: 25, buff: true, title: "Herald of Thunder", override: heraldCalc },
 	SKITTERBOTS: { cost: 35, buff: true, title: "Sitterbots" },
-	BLASPHEMY: { cost: 35, title: "Blasphemy", singleImg: true, max: 10, number: true, override: blasphemyCalc, description: "The ingame curse limit is 6, each aura stacked has a mana reservation override of 35%" },
-	AWAKENED_BLASPHEMY: { cost: 32, title: "Awakened Blasphemy", singleImg: true, max: 10, number: true, override: blasphemyCalc, description: "The ingame curse limit is 6, each aura stacked has a mana reservation override of 32% (Level 5-6 Gem)" }
+	BLASPHEMY: { cost: 35, title: "Blasphemy", singleImg: true, max: 6, number: true, description: "The ingame curse limit is 6, each aura stacked has a mana reservation override of 35%" },
+	
+	AWAKENED_BLASPHEMY: { cost: 32, title: "Awakened Blasphemy", singleImg: true, max: 6, number: true, description: "The ingame curse limit is 6, each aura stacked has a mana reservation override of 32% (Level 5-6 Gem)" }
 	
 }
 
