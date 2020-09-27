@@ -2,7 +2,7 @@ var aurasEncode = [
   [
     // add new things up here
     ['PRECISION', 5],
-    ['ASPECT', 1],
+    ['CIRCLE', 7],
     ['REDUCED_MANA', 7],
     ['AWAKENED_BLASPHEMY', 3],
     ['BLASPHEMY', 3],
@@ -20,7 +20,6 @@ var aurasEncode = [
     ['MARCH_OF_LEGION', 1],
     ['MALEVOLENCE', 1],
     ['ZEALOTRY', 1],
-    ['CIRCLE', 7],
     ['BLOOD_AND_SAND', 1],
     ['DREAD_BANNER', 1],
     ['WAR_BANNER', 1],
@@ -37,6 +36,8 @@ var aurasEncode = [
     ['VICTARIOS', 1],
   	['VIVINSECT', 1],
     //['GENEROSITY', 1],
+    ['ASPECT', 1],
+    ['MAIM', 1],
     ['EMPOWER', 1],
     ['PRISM_GUARDIAN', 1],
     ['SHIELD_TEN', 1],
@@ -62,6 +63,9 @@ var aurasEncode = [
 var settingsEncode = [
   // add new things up here
   [
+    ['DISCORD_ARTISAN', 1],
+    ['HERALD_RMR2', 1],
+    ['HERALD_RMR', 1],
 	  ['EGO', 1],
 	  ['INPIRATIONAL', 1],
 	  ['MASK_TRIBUNAL', 1],
@@ -158,22 +162,18 @@ var heraldCalc = function(pl) {
   if (pl.rootScope.settings['MASTERMIND_DISCORD'] == true) {
     localReducedMana += pl.rootScope.ITEMS[0]['MASTERMIND_DISCORD'].reduced
   }
+  if (pl.rootScope.settings['HERALD_RMR'] == true) {
+    localReducedMana += pl.rootScope.ITEMS[0]['HERALD_RMR'].reduced
+  }
+  if (pl.rootScope.settings['HERALD_RMR2'] == true) {
+    localReducedMana += pl.rootScope.ITEMS[0]['HERALD_RMR2'].reduced
+  }
+  if (pl.rootScope.settings['DISCORD_ARTISAN'] == true) {
+    localReducedMana += pl.rootScope.ITEMS[0]['DISCORD_ARTISAN'].reduced
+  }
 
   if(pl.rootScope.itemGroup['CIRCLE'][pl.auraGroup]) {
-
-
-
     var number = parseInt(pl.rootScope.itemGroup['CIRCLE'][pl.auraGroup]) || 0
-
-    //Lowest possible value of rmr for one ring is 10% this jumps from 0 to 10 and from 10 to 0
-    /*
-    if(number >= 1 && number <= 9){
-      pl.rootScope.itemGroup['CIRCLE'][pl.auraGroup] = 10
-    }
-    if(number == 10){
-      pl.rootScope.itemGroup['CIRCLE'][pl.auraGroup] = 0
-    }
-    */
     localReducedMana += pl.rootScope.LOCAL_ITEMS['CIRCLE'].reduced[number]
   }
 
@@ -202,7 +202,7 @@ var blasphemyCalc = function(pl) {
 var arcticCalc = function(pl) {
   var localReducedMana = pl.localReducedMana
   if(pl.rootScope.settings['PERFECT_FORM']) {
-    localReducedMana += pl.rootScope.ITEMS[1]['PERFECT_FORM'].reduced
+    localReducedMana += pl.rootScope.ITEMS[4]['PERFECT_FORM'].reduced
   }
   return calculateAura(pl.rootScope.AURAS[pl.aura].cost, localReducedMana, pl.globalLessMana, pl.localMutliplier)
 }
@@ -228,8 +228,10 @@ var bannerCalc = function(pl) {
   if(pl.rootScope.settings['INPIRATIONAL']) {
     return 0
   }
+
+  var localAddedRMR = pl.rootScope.ITEMS[1]['MASTER_COMMAND'].reduced
   if(pl.rootScope.settings['MASTER_COMMAND'] == true) {
-    return calculateAura(pl.rootScope.AURAS[pl.aura].cost, pl.localReducedMana+50, pl.globalLessMana, pl.localMutliplier)
+    return calculateAura(pl.rootScope.AURAS[pl.aura].cost, pl.localReducedMana+localAddedRMR, pl.globalLessMana, pl.localMutliplier)
   }
   return calculateAura(pl.rootScope.AURAS[pl.aura].cost, pl.localReducedMana, pl.globalLessMana, pl.localMutliplier)
 }
@@ -241,9 +243,9 @@ var bannerCalc = function(pl) {
  */
 //Purity of Ice
 var iceCalc = function(pl) {
-
+  var localAddedRMR = pl.rootScope.ITEMS[1]['PURE_GUILE'].reduced
   if(pl.rootScope.settings['PURE_GUILE'] == true) {
-    return calculateAura(pl.rootScope.AURAS[pl.aura].cost, pl.localReducedMana+30, pl.globalLessMana, pl.localMutliplier)
+    return calculateAura(pl.rootScope.AURAS[pl.aura].cost, pl.localReducedMana+localAddedRMR, pl.globalLessMana, pl.localMutliplier)
   }
 
   return calculateAura(pl.rootScope.AURAS[pl.aura].cost, pl.localReducedMana, pl.globalLessMana, pl.localMutliplier)
@@ -252,9 +254,9 @@ var iceCalc = function(pl) {
 
 //Purity of Fire
 var fireCalc = function(pl) {
-
+  var localAddedRMR = pl.rootScope.ITEMS[1]['PURE_MIGHT'].reduced
   if(pl.rootScope.settings['PURE_MIGHT'] == true) {
-    return calculateAura(pl.rootScope.AURAS[pl.aura].cost, pl.localReducedMana+30, pl.globalLessMana, pl.localMutliplier)
+    return calculateAura(pl.rootScope.AURAS[pl.aura].cost, pl.localReducedMana+localAddedRMR, pl.globalLessMana, pl.localMutliplier)
   }
 
   return calculateAura(pl.rootScope.AURAS[pl.aura].cost, pl.localReducedMana, pl.globalLessMana, pl.localMutliplier)
@@ -262,9 +264,9 @@ var fireCalc = function(pl) {
 
 //Purity of Lightning
 var lighCalc = function(pl) {
-
+  var localAddedRMR = pl.rootScope.ITEMS[1]['PURE_APT'].reduced
   if(pl.rootScope.settings['PURE_APT'] == true) {
-    return calculateAura(pl.rootScope.AURAS[pl.aura].cost, pl.localReducedMana+30, pl.globalLessMana, pl.localMutliplier)
+    return calculateAura(pl.rootScope.AURAS[pl.aura].cost, pl.localReducedMana+localAddedRMR, pl.globalLessMana, pl.localMutliplier)
   }
 
   return calculateAura(pl.rootScope.AURAS[pl.aura].cost, pl.localReducedMana, pl.globalLessMana, pl.localMutliplier)
@@ -276,9 +278,9 @@ var lighCalc = function(pl) {
 
 //Discipline
 var discCalc = function(pl) {
-
+  var localAddedRMR = pl.rootScope.ITEMS[1]['SELF_CONTROL'].reduced
   if(pl.rootScope.settings['SELF_CONTROL'] == true) {
-    return calculateAura(pl.rootScope.AURAS[pl.aura].cost, pl.localReducedMana+30, pl.globalLessMana, pl.localMutliplier)
+    return calculateAura(pl.rootScope.AURAS[pl.aura].cost, pl.localReducedMana+localAddedRMR, pl.globalLessMana, pl.localMutliplier)
   }
 
   return calculateAura(pl.rootScope.AURAS[pl.aura].cost, pl.localReducedMana, pl.globalLessMana, pl.localMutliplier)
@@ -286,9 +288,9 @@ var discCalc = function(pl) {
 
 //DETERMINATION
 var detCalc = function(pl) {
-
+  var localAddedRMR = pl.rootScope.ITEMS[1]['UNCOMPROMISING'].reduced
   if(pl.rootScope.settings['UNCOMPROMISING'] == true) {
-    return calculateAura(pl.rootScope.AURAS[pl.aura].cost, pl.localReducedMana+30, pl.globalLessMana, pl.localMutliplier)
+    return calculateAura(pl.rootScope.AURAS[pl.aura].cost, pl.localReducedMana+localAddedRMR, pl.globalLessMana, pl.localMutliplier)
   }
 
   return calculateAura(pl.rootScope.AURAS[pl.aura].cost, pl.localReducedMana, pl.globalLessMana, pl.localMutliplier)
@@ -297,9 +299,9 @@ var detCalc = function(pl) {
 //Grace
 
 var graceCalc = function(pl) {
-
+  var localAddedRMR = pl.rootScope.ITEMS[1]['SUBLIME_FORM'].reduced
   if(pl.rootScope.settings['SUBLIME_FORM'] == true) {
-    return calculateAura(pl.rootScope.AURAS[pl.aura].cost, pl.localReducedMana+30, pl.globalLessMana, pl.localMutliplier)
+    return calculateAura(pl.rootScope.AURAS[pl.aura].cost, pl.localReducedMana+localAddedRMR, pl.globalLessMana, pl.localMutliplier)
   }
 
   return calculateAura(pl.rootScope.AURAS[pl.aura].cost, pl.localReducedMana, pl.globalLessMana, pl.localMutliplier)
@@ -359,7 +361,11 @@ var globalLocalItem = {
   ENHANCE: { multi: 115, title: "Enhance" },
 
   BLOOD_GEM: { multi: [100, 245, 242, 239, 237, 234, 232, 229, 226, 224, 221, 218, 216, 213, 211, 208, 205, 203, 200, 197, 196, 193, 190, 187, 184, 181, 178, 175, 172, 169, 166], number: true, max: 30, title: "Blood Magic Gem", bloodMagic: true },
+  MAIM: {multi: 115, title: "Maim"},
+  CIRCLE: { reduced: [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31, 32, 33, 34, 35, 36, 37, 38, 39, 40, 41, 42, 43, 44, 45, 46, 47, 48, 49, 50, 51, 52, 53, 54, 55, 56, 57, 58, 59, 60, 61, 62, 63, 64, 65, 66, 67, 68, 69, 70, 71, 72, 73, 74, 75, 76, 77, 78, 79, 80, 81, 82, 83, 84, 85, 86, 87, 88, 89, 90, 91, 92, 93, 94, 95, 96, 97, 98, 99, 100],min:10, max: 100, number: true, special: true, title: "Circle of ...", description: "Enter total amounr of Reduced Mana for a given Herald provided by your ring(s)"},
+
   VICTARIOS: { reduced: 30, type: "CHEST", title: "Victario's Influence" },
+  THE_DEVOURING_DIADEM: { reduced: 20, type: "HELM", title: "The Devouring Diadem"},
   VIVINSECT: { reduced: -10, type: "RING", title: "Vivinsect"},
 
   PRISM_GUARDIAN: { reduced: 25, type: "SHIELD", title: "Prism Guardian", bloodMagic: true },
@@ -367,9 +373,9 @@ var globalLocalItem = {
   SHIELD_FIF: { reduced: 15, type: "SHIELD", title: "Rare local 15% reduced"},
   //[0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31, 32, 33, 34, 35, 36, 37, 38, 39, 40, 41, 42, 43, 44, 45, 46, 47, 48, 49, 50, 51, 52, 53, 54, 55, 56, 57, 58, 59, 60, 61, 62, 63, 64, 65, 66, 67, 68, 69, 70, 71, 72, 73, 74, 75, 76, 77, 78, 79, 80, 81, 82, 83, 84, 85, 86, 87, 88, 89, 90, 91, 92, 93, 94, 95, 96, 97, 98, 99, 100]
   //GENEROSITY: { multi: 100, title: "Generosity" },
-	THE_DEVOURING_DIADEM: { reduced: 20, type: "HELM", title: "The Devouring Diadem"},
+
   AULS_UPRISING: { reduced: 100, title: "Aul's Uprising", special: true, description: "Makes random aura cost no mana. For purposes of this calculator, it makes everything in the aura group reserve nothing, and you can only select one aura (the amulet doesn't have a socket - so the aura gem would be elsewhere)" },
-  CIRCLE: { reduced: [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31, 32, 33, 34, 35, 36, 37, 38, 39, 40, 41, 42, 43, 44, 45, 46, 47, 48, 49, 50, 51, 52, 53, 54, 55, 56, 57, 58, 59, 60, 61, 62, 63, 64, 65, 66, 67, 68, 69, 70, 71, 72, 73, 74, 75, 76, 77, 78, 79, 80, 81, 82, 83, 84, 85, 86, 87, 88, 89, 90, 91, 92, 93, 94, 95, 96, 97, 98, 99, 100],min:10, max: 100, number: true, special: true, title: "Circle of ...", description: "Enter total amounr of Reduced Mana for a given Herald provided by your ring(s)"},
+
   ESSENCE_WORM: { multi: 0, type: "RING", title: "Essence Worm", special: true, description: "Socketed aura will have no mana reservation cost, but increases global mana reservation costs by 40% for each ring" },
   HERETICS_VEIL: { reduced: 12, type: "HELM", title: "Heretic's Veil", special: true, description: "Reduced mana multiplier only applies to Blasphemy curses" },
   MARCH_OF_LEGION: { reduced: 0, type: "BOOTS", special: true, title: "March of the Legion", special: true, description: "Supports auras socketed in this item with Blessing support, which makes auras temporary, but still reserves mana for a fraction of time. For the purposes of this calculator, it takes your most expensive aura and sets it as ephemeral" },
@@ -381,9 +387,15 @@ var globalItem = [{
   BLOOD_MAGIC: { multi: 100, title: "Blood Magic", bloodMagic: true },
   MORTAL_CONVICTION: { reduced: 100, special: true, disabled: "!settings['BLOOD_MAGIC']", title: "Mortal Conviction", bloodMagic: true, description: "Allows you to have one non-banner aura, which is free" },
   EGO: { less: -50, title: "Supreme Ego" },
+
   INPIRATIONAL: { reduced: 100, special: true,  title: "Inpirational", description: "From the Champion Ascendancy, makes banner skills free" },
-  MASTERMIND_DISCORD: { reduced: 25, title: "Mastermind of Discord", special: true, description: "From the Elementalist Ascendancy, only applies to heralds" },
   SANCTUARY_OF_THOUGHT: { less: 10, title: "Sanctuary of Thought", description: "From the Hierophant Ascendancy" },
+  MASTERMIND_DISCORD: { reduced: 25, title: "Mastermind of Discord", special: true, description: "From the Elementalist Ascendancy, only applies to heralds" },
+
+  HERALD_RMR: { reduced: 5, title: "Reduced Mana of Heralds", special: true, description: "Only applies to heralds" },
+  HERALD_RMR2: { reduced: 5, title: "Reduced Mana of Heralds x2", special: true, description: "Only applies to heralds",  disabled: "!settings['HERALD_RMR']" },
+  DISCORD_ARTISAN: { reduced: 10, title: "Discord Artisan", special: true, description: "Only applies to heralds" },
+
   }, {
 	PURE_MIGHT: { reduced: 30, title: "Pure Might", special: true, description: "30% Reduced reservation of Purity of Fire"},
 	PURE_GUILE: { reduced: 30, title: "Pure Guile", special: true, description: "30% Reduced reservation of Purity of Ice"},
@@ -398,7 +410,8 @@ var globalItem = [{
   ALPHAS_HOWL: { reduced: 8, type: "HELM", title: "Alpha's Howl" },
 	MASK_TRIBUNAL: { reduced: 0, special: true, type: "HELM", title: "Mask of the Tribunal", description: "Adds 1% reduced mana per 250 to all stats. Add the number manually to reduced mana field"},
 	MEMORY_VAULT: { reduced: -10, type: "HELM", title: "Memory Vault" },
-	RARE_RMR: { reduced: 5, type: "HELM", title: "Rare 5% redcued" },
+
+  RARE_RMR: { reduced: 5, type: "HELM", title: "Rare 5% redcued" },
 	RARE_DBL_RMR: { reduced: 10, type: "HELM", title: "Rare 10% reduced" },
   }, {
   CONQUERORS: { reduced: 2, title: "Conqueror's Efficiency" },
@@ -406,6 +419,7 @@ var globalItem = [{
 	IMPRESENCE: { reduced: 100, type: "AMULET", special: true, title: "Impresence", description: "For the purposes of this calculator, it will set your first blasphemy aura to have 100% reduced reservation" },
   HYRRI: { reduced: 50, title: "Hyrri's Truth", special: true, description: "Precision aura cost is halved" },
   SKYFORTH: { reduced: 6, type: "BOOTS", title: "Skyforth" },
+
   SAQAWALS_NEST: { reduced: 10, type: "CHEST", title: "Saqawal's Nest", description: "Item has reduced mana roll range of 6 to 10, but for the purposes of this calculator I assume you got a maxed roll" },
   CALAMITY: { setTo: 45, type: "CHEST", title: "The Coming Calamity", special: true, description: "All hearlds are always set to 45% reservation" },
   PERFECT_FORM: { reduced: 100, type: "CHEST", title: "The Perfect Form", special: true, description: "Gives arctic armour 100% reduced reservation" }
@@ -730,6 +744,9 @@ angular.module("poeAura", [])
           break
         case 'MIDNIGHT_BARGAIN':
           $rootScope.settings['MIDNIGHT_BARGAIN2'] = false
+          break
+        case 'HERALD_RMR':
+          $rootScope.settings['HERALD_RMR2'] = false
           break
       }
     }
