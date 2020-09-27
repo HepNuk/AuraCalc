@@ -426,7 +426,10 @@ var globalItem = [{
   }, {
   ICHIMONJI: { reduced: 5, type: "1HAND", title: "Ichimonji" },
   ICHIMONJI2: { reduced: 5, type: "1HAND", title: "Ichimonji x2", disabled: "!settings['ICHIMONJI']"  },
-  }
+  },{
+  MIDNIGHT_BARGAIN: { setTo: 30, type: "WAND", title: "Midnight Bargain", bloodMagic: true },
+  MIDNIGHT_BARGAIN2: { setTo: 30, type: "WAND", title: "Midnight Bargain x2", bloodMagic: true, disabled: "!settings['MIDNIGHT_BARGAIN']" },
+}
 ]
 
 angular.module("poeAura", [])
