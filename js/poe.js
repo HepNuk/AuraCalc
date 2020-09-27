@@ -195,9 +195,6 @@ var blasphemyCalc = function(pl) {
     + (calculateAura(pl.rootScope.AURAS[pl.aura].cost, localReducedMana, pl.globalLessMana, pl.localMutliplier) * (number - 1))
   }
   else {
-	  //console.log("Cost: "+ pl.rootScope.AURAS[pl.aura].cost +" Local Red: "+ localReducedMana +" global less: "+ pl.globalLessMana +" loval multi: "+ pl.localMutliplier)
-	  //console.log(calculateAura(pl.rootScope.AURAS[pl.aura].cost, localReducedMana, pl.globalLessMana, pl.localMutliplier))
-	  //console.log(number)
     return calculateAura(pl.rootScope.AURAS[pl.aura].cost, localReducedMana, pl.globalLessMana, pl.localMutliplier) * number
   }
 }
@@ -349,9 +346,9 @@ var globalAura = {
   HERALD_PURITY: { cost: 25, buff: true, title: "Herald of Purity", override: heraldCalc },
   HERALD_THUNDER: { cost: 25, buff: true, title: "Herald of Thunder", override: heraldCalc },
 	SKITTERBOTS: { cost: 35, buff: true, title: "Sitterbots" },
-	BLASPHEMY: { cost: 35, title: "Blasphemy", singleImg: true, max: 6, number: true, description: "The ingame curse limit is 6, each aura stacked has a mana reservation override of 35%" },
+	BLASPHEMY: { cost: 35, title: "Blasphemy", curse: true, override: blasphemyCalc, singleImg: true, max: 6, number: true, description: "The ingame curse limit is 6, each aura stacked has a mana reservation override of 35%" },
 
-	AWAKENED_BLASPHEMY: { cost: 32, title: "Awakened Blasphemy", singleImg: true, max: 6, number: true, description: "The ingame curse limit is 6, each aura stacked has a mana reservation override of 32% (Level 5-6 Gem)" }
+	AWAKENED_BLASPHEMY: { cost: 32, title: "Awakened Blasphemy", curse: true, override: blasphemyCalc, singleImg: true, max: 6, number: true, description: "The ingame curse limit is 6, each aura stacked has a mana reservation override of 32% (Level 5-6 Gem)" }
 
 }
 
@@ -849,7 +846,7 @@ angular.module("poeAura", [])
           }
 
           $rootScope.reserved[aura][i] = AURAS[aura].override(payload)
-          if (AURAS[aura].number == true) {
+          if (AURAS[aura].number == true && AURAS[aura].curse == false) {
             flatReserved[$rootScope.bmGroup[i] ? 1 : 0] += $rootScope.reserved[aura][i]
           }
         }
@@ -860,15 +857,19 @@ angular.module("poeAura", [])
           $rootScope.reserved[aura][i] = flatCost
           flatReserved[$rootScope.bmGroup[i] ? 1 : 0] += flatCost
         }
+
         // Numerical aura
         else if(AURAS[aura].number == true) {
+
           if(typeof $rootScope.reserved['NEXT_' + aura] == "undefined") {
             $rootScope.reserved['NEXT_' + aura] = {}
           }
           $rootScope.reserved['NEXT_' + aura][i] = calculateAura(AURAS[aura].cost, localReducedMana, globalLessMana, localMutliplier)
+
           let number = parseInt($rootScope.auraGroup[aura][i]) || 0
           $rootScope.reserved[aura][i] = calculateAura(AURAS[aura].cost, localReducedMana, globalLessMana, localMutliplier) * number
         }
+
         // Standard checkbox aura
         else {
           $rootScope.reserved[aura][i] = calculateAura(AURAS[aura].cost, localReducedMana, globalLessMana, localMutliplier)
