@@ -4,17 +4,17 @@ var aurasEncode = [
     ['PRECISION', 5],
     ['ASPECT', 1],
     ['REDUCED_MANA', 7],
-	['AWAKENED_BLASPHEMY', 3],
+    ['AWAKENED_BLASPHEMY', 3],
     ['BLASPHEMY', 3],
     ['ENLIGHTEN', 4],
     ['BLOOD_GEM', 5],
     ['CLARITY', 5],
-	['VITALITY', 5],
+    ['VITALITY', 5],
     ['MULTIPLIER', 10]
   ],
   [
     // add new things up here
-	['SKITTERBOTS', 1],
+    ['SKITTERBOTS', 1],
     ['PRIDE', 1],
     ['FLESH_AND_STONE', 1],
     ['MARCH_OF_LEGION', 1],
@@ -35,12 +35,12 @@ var aurasEncode = [
     ['ESSENCE_WORM', 1],
     ['ENHANCE', 1],
     ['VICTARIOS', 1],
-	['VIVINSECT', 1],
+  	['VIVINSECT', 1],
     //['GENEROSITY', 1],
     ['EMPOWER', 1],
     ['PRISM_GUARDIAN', 1],
-	['SHIELD_TEN', 1],
-	['SHIELD_FIF', 1],
+    ['SHIELD_TEN', 1],
+  	['SHIELD_FIF', 1],
     ['WRATH', 1],
     ['ARCTIC', 1],
     ['PURITY_LIGHTNING', 1],
@@ -60,11 +60,11 @@ var aurasEncode = [
 ]
 
 var settingsEncode = [
-  // add new things up here 
+  // add new things up here
   [
 	  ['EGO', 1],
 	  ['INPIRATIONAL', 1],
-	  ['MASK_TRIBUNAL', 1],	  
+	  ['MASK_TRIBUNAL', 1],
 	  ['HYRRI', 1],
 	  ['SAQAWALS_NEST', 1],
 	  ['MASTERMIND_DISCORD', 1],
@@ -223,39 +223,39 @@ var bannerCalc = function(pl) {
   return calculateAura(pl.rootScope.AURAS[pl.aura].cost, pl.localReducedMana, pl.globalLessMana, pl.localMutliplier)
 }
 
-//Cluster Sections 
+//Cluster Sections
 
 /**
- * Purities 
+ * Purities
  */
 //Purity of Ice
 var iceCalc = function(pl) {
-	
+
   if(pl.rootScope.settings['PURE_GUILE'] == true) {
     return calculateAura(pl.rootScope.AURAS[pl.aura].cost, pl.localReducedMana+30, pl.globalLessMana, pl.localMutliplier)
   }
-  
+
   return calculateAura(pl.rootScope.AURAS[pl.aura].cost, pl.localReducedMana, pl.globalLessMana, pl.localMutliplier)
 }
 
 
 //Purity of Fire
 var fireCalc = function(pl) {
-	
+
   if(pl.rootScope.settings['PURE_MIGHT'] == true) {
     return calculateAura(pl.rootScope.AURAS[pl.aura].cost, pl.localReducedMana+30, pl.globalLessMana, pl.localMutliplier)
   }
-  
+
   return calculateAura(pl.rootScope.AURAS[pl.aura].cost, pl.localReducedMana, pl.globalLessMana, pl.localMutliplier)
 }
 
 //Purity of Lightning
 var lighCalc = function(pl) {
-	
+
   if(pl.rootScope.settings['PURE_APT'] == true) {
     return calculateAura(pl.rootScope.AURAS[pl.aura].cost, pl.localReducedMana+30, pl.globalLessMana, pl.localMutliplier)
   }
-  
+
   return calculateAura(pl.rootScope.AURAS[pl.aura].cost, pl.localReducedMana, pl.globalLessMana, pl.localMutliplier)
 }
 
@@ -265,32 +265,32 @@ var lighCalc = function(pl) {
 
 //Discipline
 var discCalc = function(pl) {
-	
+
   if(pl.rootScope.settings['SELF_CONTROL'] == true) {
     return calculateAura(pl.rootScope.AURAS[pl.aura].cost, pl.localReducedMana+30, pl.globalLessMana, pl.localMutliplier)
   }
-  
+
   return calculateAura(pl.rootScope.AURAS[pl.aura].cost, pl.localReducedMana, pl.globalLessMana, pl.localMutliplier)
 }
 
 //DETERMINATION
 var detCalc = function(pl) {
-	
+
   if(pl.rootScope.settings['UNCOMPROMISING'] == true) {
     return calculateAura(pl.rootScope.AURAS[pl.aura].cost, pl.localReducedMana+30, pl.globalLessMana, pl.localMutliplier)
   }
-  
+
   return calculateAura(pl.rootScope.AURAS[pl.aura].cost, pl.localReducedMana, pl.globalLessMana, pl.localMutliplier)
 }
 
 //Grace
 
 var graceCalc = function(pl) {
-	
+
   if(pl.rootScope.settings['SUBLIME_FORM'] == true) {
     return calculateAura(pl.rootScope.AURAS[pl.aura].cost, pl.localReducedMana+30, pl.globalLessMana, pl.localMutliplier)
   }
-  
+
   return calculateAura(pl.rootScope.AURAS[pl.aura].cost, pl.localReducedMana, pl.globalLessMana, pl.localMutliplier)
 }
 
@@ -299,32 +299,32 @@ var globalAura = {
 	ANGER: { cost: 50, aura: true, title: "Anger" },
 	HATRED: { cost: 50, aura: true, title: "Hatred" },
 	WRATH: { cost: 50, aura: true, title: "Wrath", override: wrathCalc },
-	
+
 	HASTE: { cost: 50, aura: true, title: "Haste" },
 	MALEVOLENCE: { cost: 50, aura: true, title: "Malevolence" },
 	ZEALOTRY: { cost: 50, aura: true, title: "Zealotry" },
-		
+
 	PURITY_FIRE: { cost: 35, aura: true, title: "Purity of Fire", override: fireCalc },
     PURITY_ICE: { cost: 35, aura: true, title: "Purity of Ice", override: iceCalc },
     PURITY_LIGHTNING: { cost: 35, aura: true, title: "Purity of Lightning", override: lighCalc },
-	
+
 	DISCIPLINE: { cost: 35, aura: true, title: "Discipline", override: discCalc },
 	GRACE: { cost: 50, aura: true, title: "Grace", override: graceCalc},
     DETERMINATION: { cost: 50, aura: true, title: "Determination", override: detCalc },
 
-	
+
 	PURITY_ELEMENTS: { cost: 35, aura: true, title: "Purity of Elements" },
 	ENVY: { cost: 50, aura: true, item: true, title: "Envy", description: "Granted by United in Dream Cutlass" },
 	ASPECT: { cost: 25, buff: true, title: "Aspect", singleImg: true, description: "There are currently 4 aspect auras introduced in bestiary: cat, avian, spider, and crab" },
-	
+
 	CLARITY: { flat: [0, 34, 48, 61, 76, 89, 102, 115, 129, 141, 154, 166, 178, 190, 203, 214, 227, 239, 251, 265, 279, 293, 303, 313, 323, 333, 343, 353, 363, 373, 383, 383], title: "Clarity", aura: true, number: true, max: 30 },
 	PRECISION: { flat: [0, 22, 32, 40, 50, 59, 68, 76, 86, 94, 102, 110, 118, 126, 135, 142, 151, 159, 167, 176, 186, 195, 202, 208, 215, 222, 228, 235, 242, 248, 255], title: "Precision", aura: true, number: true, max: 30, override: precisionCalc },
     VITALITY: { flat: [0, 28, 40, 51, 63, 74, 85, 96, 108, 118, 128, 138, 148, 158, 169, 178, 189, 199, 209, 221, 233, 244, 253, 261, 269, 278, 286, 294, 303, 311, 319], title: "Vitality", aura: true, number: true, max: 30 },
 
 	FLESH_AND_STONE: { cost: 25, aura: true, title: "Flesh and Stone" },
 	BLOOD_AND_SAND: { cost: 10, buff: true, title: "Blood and Sand" },
-	ARCTIC: { cost: 25, buff: true, title: "Arctic Armour", override: arcticCalc }, 
-	
+	ARCTIC: { cost: 25, buff: true, title: "Arctic Armour", override: arcticCalc },
+
 	PRIDE: { cost: 50, aura: true, title: "Pride" },
     WAR_BANNER: { cost: 10, aura: true, banner: true, can_drop: true, title: "War Banner", override: bannerCalc },
 	DREAD_BANNER: { cost: 10, aura: true, banner: true, can_drop: true, title: "Dread Banner", override: bannerCalc },
@@ -336,25 +336,25 @@ var globalAura = {
     HERALD_THUNDER: { cost: 25, buff: true, title: "Herald of Thunder", override: heraldCalc },
 	SKITTERBOTS: { cost: 35, buff: true, title: "Sitterbots" },
 	BLASPHEMY: { cost: 35, title: "Blasphemy", singleImg: true, max: 6, number: true, description: "The ingame curse limit is 6, each aura stacked has a mana reservation override of 35%" },
-	
+
 	AWAKENED_BLASPHEMY: { cost: 32, title: "Awakened Blasphemy", singleImg: true, max: 6, number: true, description: "The ingame curse limit is 6, each aura stacked has a mana reservation override of 32% (Level 5-6 Gem)" }
-	
+
 }
 
 var globalLocalItem = {
-	
+
 	ENLIGHTEN: { multi: [100, 100, 96, 92, 88, 84, 80, 76, 72, 68, 64], number: true, max: 10, title: "Enlighten" },
     EMPOWER: { multi: 125, title: "Empower" },
     ENHANCE: { multi: 115, title: "Enhance" },
-	
+
 	BLOOD_GEM: { multi: [100, 245, 242, 239, 237, 234, 232, 229, 226, 224, 221, 218, 216, 213, 211, 208, 205, 203, 200, 197, 196, 193, 190, 187, 184, 181, 178, 175, 172, 169, 166], number: true, max: 30, title: "Blood Magic Gem", bloodMagic: true },
     VICTARIOS: { reduced: 30, type: "CHEST", title: "Victario's Influence" },
 	VIVINSECT: { reduced: -10, type: "RING", title: "Vivinsect"},
-	
+
 	PRISM_GUARDIAN: { reduced: 25, type: "SHIELD", title: "Prism Guardian", bloodMagic: true },
 	SHIELD_TEN: { reduced: 10, type: "SHIELD", title: "Rare local 10% reduced "},
 	SHIELD_FIF: { reduced: 15, type: "SHIELD", title: "Rare local 15% reduced"},
-	
+
     //GENEROSITY: { multi: 100, title: "Generosity" },
 	THE_DEVOURING_DIADEM: { reduced: 20, type: "HELM", title: "The Devouring Diadem"},
     AULS_UPRISING: { reduced: 100, title: "Aul's Uprising", special: true, description: "Makes random aura cost no mana. For purposes of this calculator, it makes everything in the aura group reserve nothing, and you can only select one aura (the amulet doesn't have a socket - so the aura gem would be elsewhere)" },
@@ -363,7 +363,7 @@ var globalLocalItem = {
     HERETICS_VEIL: { reduced: 12, type: "HELM", title: "Heretic's Veil", special: true, description: "Reduced mana multiplier only applies to Blasphemy curses" },
     MARCH_OF_LEGION: { reduced: 0, type: "BOOTS", special: true, title: "March of the Legion", special: true, description: "Supports auras socketed in this item with Blessing support, which makes auras temporary, but still reserves mana for a fraction of time. For the purposes of this calculator, it takes your most expensive aura and sets it as ephemeral" },
     THE_COVENANT: { reduced: 0, type: "CHEST", title: "The Covenant", bloodMagic: true }
-    
+
 }
 
 var globalItem = [{
@@ -381,7 +381,7 @@ var globalItem = [{
 	SELF_CONTROL: { reduced: 30, title: "Self-Control", special: true, description: "30% Reduced reservation of Discipline"},
 	SUBLIME_FORM: { reduced: 30, title: "Sublime Form", special: true, description: "30% Reduced reservation of Grace"},
 	UNCOMPROMISING: { reduced: 30, title: "Uncompromising", special: true, description: "30% Reduced reservation of Determination"},
-	
+
 	MASTER_COMMAND: { reduced: 50, title: "Master of Command", special: true, description: "50% Reduced reservation of Banners"},
   }, {
     ALPHAS_HOWL: { reduced: 8, type: "HELM", title: "Alpha's Howl" },
@@ -967,38 +967,38 @@ angular.module("poeAura", [])
 	  */
 	//for (let i in $rootScope.settings){
 
-		
+
 		var hashGroupS = []
 		for (let s in settingsEncode) {
-			
-			
+
+
 			var bin = ""
-			
+
 			for (let t in settingsEncode[s]){
-				
+
 
 				var value = null
-				
-				
+
+
 				if(settingsEncode[s][t][0]){
-				
+
 					value = $rootScope.settings[settingsEncode[s][t][0]]
-					
+
 				}
-				
+
 				if(settingsEncode[s][t][1] == 1){
 					bin += value ? 1 : 0
-					
+
 				} else {
 					bin += pad((value ? parseInt(value) : 0).toString(2), settingsEncode[s][t][1])
-					
+
 				}
 			}
 			hashGroupS.push(alpha.encode(parseInt(bin,2)))
 		}
 		hash.push(hashGroupS.join("."))
-		
-		
+
+
 	//}
 
     //hash.push(alpha.encode(parseInt(bin,2)))
@@ -1023,7 +1023,7 @@ angular.module("poeAura", [])
             {
               console.log('Could not find:', aurasEncode[a][b][0])
             }
-			 
+
             if(aurasEncode[a][b][1] == 1) {
               bin += value ? 1 : 0
             }
@@ -1044,37 +1044,37 @@ angular.module("poeAura", [])
 
   // Load from URL
   if(hash.length > 0) {
-    
+
 	data = hash.split("/")
     var bin = pad(alpha.decode(data[0]).toString(2), 65)
     var pos = 0
-	
-	var settData = data[0].split(".")	
+
+	var settData = data[0].split(".")
 	console.log(settData)
-	
+
 	for(b=0; b <= settData.length -1; b++){
-		console.log(b)	
+		console.log(b)
 		var bin = pad(alpha.decode(settData[b]).toString(2), 65)
 		var pos = 0
-		
-		
-		
+
+
+
 		for(i=settingsEncode[b].length - 1; i >= 0; i--) {
 
 			pos += settingsEncode[b][i][1]
-			
-			
+
+
 			var bindata = parseInt(bin.substr((pos * -1 ? pos * -1 : 0), settingsEncode[b][i][1]).toString(), 2)
 
 			if(settingsEncode[b][i][1] == 1) {
 			bindata = bindata ? true : false
-			
+
 			}
 			console.log(settingsEncode[b][i][0])
-			
+
 			$rootScope.settings[settingsEncode[b][i][0]] = bindata
 		}
-	
+
 	}
 
     $rootScope.auraGroups = []
@@ -1110,7 +1110,7 @@ angular.module("poeAura", [])
         }
       }
     }
-	
+
     $rootScope.life = $rootScope.settings['life']
     $rootScope.mana = $rootScope.settings['mana']
     $rootScope.viewing = true
