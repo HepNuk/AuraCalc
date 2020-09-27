@@ -152,6 +152,21 @@ var calculateAura = function(aura, reducedMana = 0, lessMana = [], multiplier = 
   return Math.max(Math.floor(total * lessPercentage), 0)
 }
 
+var aspectCalc = function(pl){
+
+  var localReducedMana = 0
+  var localMultiMana = pl.localMutliplier
+
+  if (pl.rootScope.itemGroup['ENLIGHTEN'][pl.auraGroup]){
+    var number = parseInt(pl.rootScope.itemGroup['ENLIGHTEN'][pl.auraGroup])
+    localMultiMana += 100-pl.rootScope.LOCAL_ITEMS['ENLIGHTEN'].multi[number]
+
+  }
+
+  return calculateAura(pl.rootScope.AURAS[pl.aura].cost, localReducedMana, pl.globalLessMana, localMultiMana)
+}
+
+//Heralds
 var heraldCalc = function(pl) {
   if(pl.rootScope.settings['CALAMITY']) {
     return 45
@@ -180,6 +195,7 @@ var heraldCalc = function(pl) {
   return calculateAura(pl.rootScope.AURAS[pl.aura].cost, localReducedMana, pl.globalLessMana, pl.localMutliplier)
 }
 
+//Blasphemy / Awakened Blasphemy
 var blasphemyCalc = function(pl) {
   var localReducedMana = pl.localReducedMana
   if(pl.rootScope.itemGroup['HERETICS_VEIL'][pl.auraGroup]) {
@@ -199,6 +215,7 @@ var blasphemyCalc = function(pl) {
   }
 }
 
+//Artic Armour
 var arcticCalc = function(pl) {
   var localReducedMana = pl.localReducedMana
   if(pl.rootScope.settings['PERFECT_FORM']) {
@@ -207,6 +224,7 @@ var arcticCalc = function(pl) {
   return calculateAura(pl.rootScope.AURAS[pl.aura].cost, localReducedMana, pl.globalLessMana, pl.localMutliplier)
 }
 
+//Wrath (?)
 var wrathCalc = function(pl) {
   if(pl.rootScope.settings['AULS_UPRISING']) {
     return 0
@@ -214,6 +232,7 @@ var wrathCalc = function(pl) {
   return calculateAura(pl.rootScope.AURAS[pl.aura].cost, pl.localReducedMana, pl.globalLessMana, pl.localMutliplier)
 }
 
+//Precison
 var precisionCalc = function(pl) {
   const glm = [...pl.globalLessMana]
   if(pl.rootScope.settings['HYRRI']) {
@@ -328,7 +347,7 @@ var globalAura = {
 
 	PURITY_ELEMENTS: { cost: 35, aura: true, title: "Purity of Elements" },
 	ENVY: { cost: 50, aura: true, item: true, title: "Envy", description: "Granted by United in Dream Cutlass" },
-	ASPECT: { cost: 25, buff: true, title: "Aspect", singleImg: true, description: "There are currently 4 aspect auras introduced in bestiary: cat, avian, spider, and crab" },
+	ASPECT: { cost: 25, buff: true, title: "Aspect", singleImg: true, description: "There are currently 4 aspect auras introduced in bestiary: cat, avian, spider, and crab", override: aspectCalc},
 
 	CLARITY: { flat: [0, 34, 48, 61, 76, 89, 102, 115, 129, 141, 154, 166, 178, 190, 203, 214, 227, 239, 251, 265, 279, 293, 303, 313, 323, 333, 343, 353, 363, 373, 383, 383], title: "Clarity", aura: true, number: true, max: 30 },
 	PRECISION: { flat: [0, 22, 32, 40, 50, 59, 68, 76, 86, 94, 102, 110, 118, 126, 135, 142, 151, 159, 167, 176, 186, 195, 202, 208, 215, 222, 228, 235, 242, 248, 255], title: "Precision", aura: true, number: true, max: 30, override: precisionCalc },
