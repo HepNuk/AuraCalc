@@ -63,6 +63,7 @@ var aurasEncode = [
 var settingsEncode = [
   // add new things up here
   [
+    ['PERFECT_FORM_REPLICA', 1],
     ['DISCORD_ARTISAN', 1],
     ['HERALD_RMR2', 1],
     ['HERALD_RMR', 1],
@@ -152,6 +153,12 @@ var calculateAura = function(aura, reducedMana = 0, lessMana = [], multiplier = 
   return Math.max(Math.floor(total * lessPercentage), 0)
 }
 
+/*
+  Aspects
+
+  Aspect Does not scale with Enlighten nor with local increases
+  and reductions to mana.
+ */
 var aspectCalc = function(pl){
 
   var localReducedMana = 0
@@ -166,7 +173,12 @@ var aspectCalc = function(pl){
   return calculateAura(pl.rootScope.AURAS[pl.aura].cost, localReducedMana, pl.globalLessMana, localMultiMana)
 }
 
-//Heralds
+/*
+  Heralds
+
+  Heralds have reduced reservation if specfic nodes or ascendenies are allocated
+  as well as pototian from 10 all the way to 96% reduced mana from Circle Rings
+*/
 var heraldCalc = function(pl) {
   if(pl.rootScope.settings['CALAMITY']) {
     return 45
@@ -195,7 +207,15 @@ var heraldCalc = function(pl) {
   return calculateAura(pl.rootScope.AURAS[pl.aura].cost, localReducedMana, pl.globalLessMana, pl.localMutliplier)
 }
 
-//Blasphemy / Awakened Blasphemy
+/*
+  Blasphemy / Awakened Blasphemy
+
+  Blasphemy Curses can be free with Impresence (only 1)
+  They can also have Local Reduced Mana reservation from Hertics Veil applie
+  to them only.
+
+  TODO: Curse Reservation Notables from Clusters
+*/
 var blasphemyCalc = function(pl) {
   var localReducedMana = pl.localReducedMana
   if(pl.rootScope.itemGroup['HERETICS_VEIL'][pl.auraGroup]) {
@@ -215,7 +235,11 @@ var blasphemyCalc = function(pl) {
   }
 }
 
-//Artic Armour
+/*
+  Arctic Armour
+
+  Arctic Armour reserves no mana if Perfect form is equiped
+*/
 var arcticCalc = function(pl) {
   var localReducedMana = pl.localReducedMana
   if(pl.rootScope.settings['PERFECT_FORM']) {
@@ -223,8 +247,24 @@ var arcticCalc = function(pl) {
   }
   return calculateAura(pl.rootScope.AURAS[pl.aura].cost, localReducedMana, pl.globalLessMana, pl.localMutliplier)
 }
+/*
+  Flesh and Stone
 
-//Wrath (?)
+  Flesh and Stone Reservation no Mana is Replica Perfect Form is equiped
+*/
+var fleshCalc = function(pl) {
+  var localReducedMana = pl.localReducedMana
+  if(pl.rootScope.settings['PERFECT_FORM_REPLICA']) {
+    localReducedMana += pl.rootScope.ITEMS[4]['PERFECT_FORM_REPLICA'].reduced
+  }
+  return calculateAura(pl.rootScope.AURAS[pl.aura].cost, localReducedMana, pl.globalLessMana, pl.localMutliplier)
+}
+
+/*
+  Wrath
+
+  This was here before, seems redudant will leave not to break anything.
+*/
 var wrathCalc = function(pl) {
   if(pl.rootScope.settings['AULS_UPRISING']) {
     return 0
@@ -232,7 +272,11 @@ var wrathCalc = function(pl) {
   return calculateAura(pl.rootScope.AURAS[pl.aura].cost, pl.localReducedMana, pl.globalLessMana, pl.localMutliplier)
 }
 
-//Precison
+/*
+  Precision
+
+  Has 50%less Reservation with Hyrri's
+*/
 var precisionCalc = function(pl) {
   const glm = [...pl.globalLessMana]
   if(pl.rootScope.settings['HYRRI']) {
@@ -242,7 +286,13 @@ var precisionCalc = function(pl) {
   return calculateAura(flatCost, pl.localReducedMana, glm, pl.localMutliplier, true)
 }
 
-//Banners
+/*
+  Banners
+
+  Banners reserve no mana with the champion notable Inpirational
+  Banners also have a Notable on cluster jewels "Master of Command" That has
+  50% redcued reservation cost for banners only
+*/
 var bannerCalc = function(pl) {
   if(pl.rootScope.settings['INPIRATIONAL']) {
     return 0
@@ -255,11 +305,11 @@ var bannerCalc = function(pl) {
   return calculateAura(pl.rootScope.AURAS[pl.aura].cost, pl.localReducedMana, pl.globalLessMana, pl.localMutliplier)
 }
 
-//Cluster Sections
+/*
+  Purity of Ice,Fire,Lightning as well as Discipline, Determination, GRACE
+  All have Cluster notables that grant 30% Reduced resrvation for each inidivually
+*/
 
-/**
- * Purities
- */
 //Purity of Ice
 var iceCalc = function(pl) {
   var localAddedRMR = pl.rootScope.ITEMS[1]['PURE_GUILE'].reduced
@@ -291,10 +341,6 @@ var lighCalc = function(pl) {
   return calculateAura(pl.rootScope.AURAS[pl.aura].cost, pl.localReducedMana, pl.globalLessMana, pl.localMutliplier)
 }
 
-/**
- * Defence Auras
- */
-
 //Discipline
 var discCalc = function(pl) {
   var localAddedRMR = pl.rootScope.ITEMS[1]['SELF_CONTROL'].reduced
@@ -316,7 +362,6 @@ var detCalc = function(pl) {
 }
 
 //Grace
-
 var graceCalc = function(pl) {
   var localAddedRMR = pl.rootScope.ITEMS[1]['SUBLIME_FORM'].reduced
   if(pl.rootScope.settings['SUBLIME_FORM'] == true) {
@@ -353,7 +398,7 @@ var globalAura = {
 	PRECISION: { flat: [0, 22, 32, 40, 50, 59, 68, 76, 86, 94, 102, 110, 118, 126, 135, 142, 151, 159, 167, 176, 186, 195, 202, 208, 215, 222, 228, 235, 242, 248, 255], title: "Precision", aura: true, number: true, max: 30, override: precisionCalc },
   VITALITY: { flat: [0, 28, 40, 51, 63, 74, 85, 96, 108, 118, 128, 138, 148, 158, 169, 178, 189, 199, 209, 221, 233, 244, 253, 261, 269, 278, 286, 294, 303, 311, 319], title: "Vitality", aura: true, number: true, max: 30 },
 
-	FLESH_AND_STONE: { cost: 25, aura: true, title: "Flesh and Stone" },
+	FLESH_AND_STONE: { cost: 25, aura: true, title: "Flesh and Stone", override: fleshCalc },
 	BLOOD_AND_SAND: { cost: 10, buff: true, title: "Blood and Sand" },
 	ARCTIC: { cost: 25, buff: true, title: "Arctic Armour", override: arcticCalc },
 
@@ -440,8 +485,9 @@ var globalItem = [{
   SKYFORTH: { reduced: 6, type: "BOOTS", title: "Skyforth" },
 
   SAQAWALS_NEST: { reduced: 10, type: "CHEST", title: "Saqawal's Nest", description: "Item has reduced mana roll range of 6 to 10, but for the purposes of this calculator I assume you got a maxed roll" },
-  CALAMITY: { setTo: 45, type: "CHEST", title: "The Coming Calamity", special: true, description: "All hearlds are always set to 45% reservation" },
-  PERFECT_FORM: { reduced: 100, type: "CHEST", title: "The Perfect Form", special: true, description: "Gives arctic armour 100% reduced reservation" }
+  PERFECT_FORM: { reduced: 100, type: "CHEST", title: "The Perfect Form", special: true, description: "Gives arctic armour 100% reduced reservation" },
+  PERFECT_FORM_REPLICA: { reduced: 100, type: "CHEST", title: "Replica Perfect Form", special: true, description: "Gives Flesh and stone 100% reduced reservation" },
+  CALAMITY: { setTo: 45, type: "CHEST", title: "The Coming Calamity", special: true, description: "All hearlds are always set to 45% reservation" }
   }, {
   ICHIMONJI: { reduced: 5, type: "1HAND", title: "Ichimonji" },
   ICHIMONJI2: { reduced: 5, type: "1HAND", title: "Ichimonji x2", disabled: "!settings['ICHIMONJI']"  },
