@@ -217,6 +217,13 @@ div.bm .edited .multi {
   min-height: 60px;
   position: relative;
 }
+#info div.class .innerlog {
+  padding-left: 5px;
+  font-size: 16px;
+  background: #111;
+  min-height: 60px;
+  position: relative;
+}
 #info img {
   position: absolute;
   left: 0;
