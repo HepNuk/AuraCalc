@@ -4,7 +4,6 @@ var aurasEncode = [
     ['PRECISION', 5],
     ['CIRCLE', 7],
     ['REDUCED_MANA', 7],
-
     ['ENLIGHTEN', 4],
     ['BLOOD_GEM', 5],
     ['CLARITY', 5],
@@ -867,7 +866,7 @@ angular.module("poeAura", [])
           }
 
           $rootScope.reserved[aura][i] = AURAS[aura].override(payload)
-          if (AURAS[aura].number == true && AURAS[aura].curse == false) {
+          if (AURAS[aura].number == true && AURAS[aura].curse != true) {
             flatReserved[$rootScope.bmGroup[i] ? 1 : 0] += $rootScope.reserved[aura][i]
           }
         }
