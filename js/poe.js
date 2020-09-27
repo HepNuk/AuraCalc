@@ -20,7 +20,7 @@ var aurasEncode = [
     ['MARCH_OF_LEGION', 1],
     ['MALEVOLENCE', 1],
     ['ZEALOTRY', 1],
-    ['CIRCLE', 1],
+    ['CIRCLE', 7],
     ['BLOOD_AND_SAND', 1],
     ['DREAD_BANNER', 1],
     ['WAR_BANNER', 1],
@@ -160,7 +160,21 @@ var heraldCalc = function(pl) {
   }
 
   if(pl.rootScope.itemGroup['CIRCLE'][pl.auraGroup]) {
-    localReducedMana += pl.rootScope.LOCAL_ITEMS['CIRCLE'].reduced
+
+
+
+    var number = parseInt(pl.rootScope.itemGroup['CIRCLE'][pl.auraGroup]) || 0
+
+    //Lowest possible value of rmr for one ring is 10% this jumps from 0 to 10 and from 10 to 0
+    /*
+    if(number >= 1 && number <= 9){
+      pl.rootScope.itemGroup['CIRCLE'][pl.auraGroup] = 10
+    }
+    if(number == 10){
+      pl.rootScope.itemGroup['CIRCLE'][pl.auraGroup] = 0
+    }
+    */
+    localReducedMana += pl.rootScope.LOCAL_ITEMS['CIRCLE'].reduced[number]
   }
 
   return calculateAura(pl.rootScope.AURAS[pl.aura].cost, localReducedMana, pl.globalLessMana, pl.localMutliplier)
@@ -181,9 +195,9 @@ var blasphemyCalc = function(pl) {
     + (calculateAura(pl.rootScope.AURAS[pl.aura].cost, localReducedMana, pl.globalLessMana, pl.localMutliplier) * (number - 1))
   }
   else {
-	  console.log("Cost: "+ pl.rootScope.AURAS[pl.aura].cost +" Local Red: "+ localReducedMana +" global less: "+ pl.globalLessMana +" loval multi: "+ pl.localMutliplier)
-	  console.log(calculateAura(pl.rootScope.AURAS[pl.aura].cost, localReducedMana, pl.globalLessMana, pl.localMutliplier))
-	  console.log(number)
+	  //console.log("Cost: "+ pl.rootScope.AURAS[pl.aura].cost +" Local Red: "+ localReducedMana +" global less: "+ pl.globalLessMana +" loval multi: "+ pl.localMutliplier)
+	  //console.log(calculateAura(pl.rootScope.AURAS[pl.aura].cost, localReducedMana, pl.globalLessMana, pl.localMutliplier))
+	  //console.log(number)
     return calculateAura(pl.rootScope.AURAS[pl.aura].cost, localReducedMana, pl.globalLessMana, pl.localMutliplier) * number
   }
 }
@@ -354,11 +368,11 @@ var globalLocalItem = {
   PRISM_GUARDIAN: { reduced: 25, type: "SHIELD", title: "Prism Guardian", bloodMagic: true },
   SHIELD_TEN: { reduced: 10, type: "SHIELD", title: "Rare local 10% reduced "},
   SHIELD_FIF: { reduced: 15, type: "SHIELD", title: "Rare local 15% reduced"},
-
+  //[0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31, 32, 33, 34, 35, 36, 37, 38, 39, 40, 41, 42, 43, 44, 45, 46, 47, 48, 49, 50, 51, 52, 53, 54, 55, 56, 57, 58, 59, 60, 61, 62, 63, 64, 65, 66, 67, 68, 69, 70, 71, 72, 73, 74, 75, 76, 77, 78, 79, 80, 81, 82, 83, 84, 85, 86, 87, 88, 89, 90, 91, 92, 93, 94, 95, 96, 97, 98, 99, 100]
   //GENEROSITY: { multi: 100, title: "Generosity" },
 	THE_DEVOURING_DIADEM: { reduced: 20, type: "HELM", title: "The Devouring Diadem"},
   AULS_UPRISING: { reduced: 100, title: "Aul's Uprising", special: true, description: "Makes random aura cost no mana. For purposes of this calculator, it makes everything in the aura group reserve nothing, and you can only select one aura (the amulet doesn't have a socket - so the aura gem would be elsewhere)" },
-  CIRCLE: { reduced: 40, special: true, title: "Circle of ...", description: "Reduces mana reservation of random herald. Item has reduced mana roll but I assume you got 40%." },
+  CIRCLE: { reduced: [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31, 32, 33, 34, 35, 36, 37, 38, 39, 40, 41, 42, 43, 44, 45, 46, 47, 48, 49, 50, 51, 52, 53, 54, 55, 56, 57, 58, 59, 60, 61, 62, 63, 64, 65, 66, 67, 68, 69, 70, 71, 72, 73, 74, 75, 76, 77, 78, 79, 80, 81, 82, 83, 84, 85, 86, 87, 88, 89, 90, 91, 92, 93, 94, 95, 96, 97, 98, 99, 100],min:10, max: 100, number: true, special: true, title: "Circle of ...", description: "Enter total amounr of Reduced Mana for a given Herald provided by your ring(s)"},
   ESSENCE_WORM: { multi: 0, type: "RING", title: "Essence Worm", special: true, description: "Socketed aura will have no mana reservation cost, but increases global mana reservation costs by 40% for each ring" },
   HERETICS_VEIL: { reduced: 12, type: "HELM", title: "Heretic's Veil", special: true, description: "Reduced mana multiplier only applies to Blasphemy curses" },
   MARCH_OF_LEGION: { reduced: 0, type: "BOOTS", special: true, title: "March of the Legion", special: true, description: "Supports auras socketed in this item with Blessing support, which makes auras temporary, but still reserves mana for a fraction of time. For the purposes of this calculator, it takes your most expensive aura and sets it as ephemeral" },
@@ -1050,10 +1064,10 @@ angular.module("poeAura", [])
     var pos = 0
 
 	var settData = data[0].split(".")
-	console.log(settData)
+
 
 	for(b=0; b <= settData.length -1; b++){
-		console.log(b)
+
 		var bin = pad(alpha.decode(settData[b]).toString(2), 65)
 		var pos = 0
 
@@ -1070,7 +1084,7 @@ angular.module("poeAura", [])
 			bindata = bindata ? true : false
 
 			}
-			console.log(settingsEncode[b][i][0])
+
 
 			$rootScope.settings[settingsEncode[b][i][0]] = bindata
 		}
@@ -1245,6 +1259,7 @@ angular.module("poeAura", [])
     </abbr>
     <span class="reserved" ng-if="item.number==true">
       <span ng-if="item.multi!==undefined">x{{ multiplier[key][index] }}%</span>
+      <span ng-if="item.reduced!==undefined">x{{ 100 - item.reduced[itemGroup[key][index]]}}%<span ng-if="item.special">*</span></span>
     </span>
     <span class="reserved" ng-if="item.number!==true">
       <span ng-if="item.multi!==undefined">x{{ item.multi }}%<span ng-if="item.special">*</span></span>
