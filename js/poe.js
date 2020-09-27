@@ -304,13 +304,13 @@ var globalAura = {
 	MALEVOLENCE: { cost: 50, aura: true, title: "Malevolence" },
 	ZEALOTRY: { cost: 50, aura: true, title: "Zealotry" },
 
-	PURITY_FIRE: { cost: 35, aura: true, title: "Purity of Fire", override: fireCalc },
-    PURITY_ICE: { cost: 35, aura: true, title: "Purity of Ice", override: iceCalc },
-    PURITY_LIGHTNING: { cost: 35, aura: true, title: "Purity of Lightning", override: lighCalc },
+  PURITY_FIRE: { cost: 35, aura: true, title: "Purity of Fire", override: fireCalc },
+  PURITY_ICE: { cost: 35, aura: true, title: "Purity of Ice", override: iceCalc },
+  PURITY_LIGHTNING: { cost: 35, aura: true, title: "Purity of Lightning", override: lighCalc },
 
 	DISCIPLINE: { cost: 35, aura: true, title: "Discipline", override: discCalc },
 	GRACE: { cost: 50, aura: true, title: "Grace", override: graceCalc},
-    DETERMINATION: { cost: 50, aura: true, title: "Determination", override: detCalc },
+  DETERMINATION: { cost: 50, aura: true, title: "Determination", override: detCalc },
 
 
 	PURITY_ELEMENTS: { cost: 35, aura: true, title: "Purity of Elements" },
@@ -319,21 +319,21 @@ var globalAura = {
 
 	CLARITY: { flat: [0, 34, 48, 61, 76, 89, 102, 115, 129, 141, 154, 166, 178, 190, 203, 214, 227, 239, 251, 265, 279, 293, 303, 313, 323, 333, 343, 353, 363, 373, 383, 383], title: "Clarity", aura: true, number: true, max: 30 },
 	PRECISION: { flat: [0, 22, 32, 40, 50, 59, 68, 76, 86, 94, 102, 110, 118, 126, 135, 142, 151, 159, 167, 176, 186, 195, 202, 208, 215, 222, 228, 235, 242, 248, 255], title: "Precision", aura: true, number: true, max: 30, override: precisionCalc },
-    VITALITY: { flat: [0, 28, 40, 51, 63, 74, 85, 96, 108, 118, 128, 138, 148, 158, 169, 178, 189, 199, 209, 221, 233, 244, 253, 261, 269, 278, 286, 294, 303, 311, 319], title: "Vitality", aura: true, number: true, max: 30 },
+  VITALITY: { flat: [0, 28, 40, 51, 63, 74, 85, 96, 108, 118, 128, 138, 148, 158, 169, 178, 189, 199, 209, 221, 233, 244, 253, 261, 269, 278, 286, 294, 303, 311, 319], title: "Vitality", aura: true, number: true, max: 30 },
 
 	FLESH_AND_STONE: { cost: 25, aura: true, title: "Flesh and Stone" },
 	BLOOD_AND_SAND: { cost: 10, buff: true, title: "Blood and Sand" },
 	ARCTIC: { cost: 25, buff: true, title: "Arctic Armour", override: arcticCalc },
 
 	PRIDE: { cost: 50, aura: true, title: "Pride" },
-    WAR_BANNER: { cost: 10, aura: true, banner: true, can_drop: true, title: "War Banner", override: bannerCalc },
+  WAR_BANNER: { cost: 10, aura: true, banner: true, can_drop: true, title: "War Banner", override: bannerCalc },
 	DREAD_BANNER: { cost: 10, aura: true, banner: true, can_drop: true, title: "Dread Banner", override: bannerCalc },
 
-    HERALD_AGONY: { cost: 25, buff: true, title: "Herald of Agony", override: heraldCalc },
-    HERALD_ASH: { cost: 25, buff: true, title: "Herald of Ash", override: heraldCalc },
-    HERALD_ICE: { cost: 25, buff: true, title: "Herald of Ice", override: heraldCalc },
-    HERALD_PURITY: { cost: 25, buff: true, title: "Herald of Purity", override: heraldCalc },
-    HERALD_THUNDER: { cost: 25, buff: true, title: "Herald of Thunder", override: heraldCalc },
+  HERALD_AGONY: { cost: 25, buff: true, title: "Herald of Agony", override: heraldCalc },
+  HERALD_ASH: { cost: 25, buff: true, title: "Herald of Ash", override: heraldCalc },
+  HERALD_ICE: { cost: 25, buff: true, title: "Herald of Ice", override: heraldCalc },
+  HERALD_PURITY: { cost: 25, buff: true, title: "Herald of Purity", override: heraldCalc },
+  HERALD_THUNDER: { cost: 25, buff: true, title: "Herald of Thunder", override: heraldCalc },
 	SKITTERBOTS: { cost: 35, buff: true, title: "Sitterbots" },
 	BLASPHEMY: { cost: 35, title: "Blasphemy", singleImg: true, max: 6, number: true, description: "The ingame curse limit is 6, each aura stacked has a mana reservation override of 35%" },
 
@@ -344,35 +344,35 @@ var globalAura = {
 var globalLocalItem = {
 
 	ENLIGHTEN: { multi: [100, 100, 96, 92, 88, 84, 80, 76, 72, 68, 64], number: true, max: 10, title: "Enlighten" },
-    EMPOWER: { multi: 125, title: "Empower" },
-    ENHANCE: { multi: 115, title: "Enhance" },
+  EMPOWER: { multi: 125, title: "Empower" },
+  ENHANCE: { multi: 115, title: "Enhance" },
 
-	BLOOD_GEM: { multi: [100, 245, 242, 239, 237, 234, 232, 229, 226, 224, 221, 218, 216, 213, 211, 208, 205, 203, 200, 197, 196, 193, 190, 187, 184, 181, 178, 175, 172, 169, 166], number: true, max: 30, title: "Blood Magic Gem", bloodMagic: true },
-    VICTARIOS: { reduced: 30, type: "CHEST", title: "Victario's Influence" },
-	VIVINSECT: { reduced: -10, type: "RING", title: "Vivinsect"},
+  BLOOD_GEM: { multi: [100, 245, 242, 239, 237, 234, 232, 229, 226, 224, 221, 218, 216, 213, 211, 208, 205, 203, 200, 197, 196, 193, 190, 187, 184, 181, 178, 175, 172, 169, 166], number: true, max: 30, title: "Blood Magic Gem", bloodMagic: true },
+  VICTARIOS: { reduced: 30, type: "CHEST", title: "Victario's Influence" },
+  VIVINSECT: { reduced: -10, type: "RING", title: "Vivinsect"},
 
-	PRISM_GUARDIAN: { reduced: 25, type: "SHIELD", title: "Prism Guardian", bloodMagic: true },
-	SHIELD_TEN: { reduced: 10, type: "SHIELD", title: "Rare local 10% reduced "},
-	SHIELD_FIF: { reduced: 15, type: "SHIELD", title: "Rare local 15% reduced"},
+  PRISM_GUARDIAN: { reduced: 25, type: "SHIELD", title: "Prism Guardian", bloodMagic: true },
+  SHIELD_TEN: { reduced: 10, type: "SHIELD", title: "Rare local 10% reduced "},
+  SHIELD_FIF: { reduced: 15, type: "SHIELD", title: "Rare local 15% reduced"},
 
-    //GENEROSITY: { multi: 100, title: "Generosity" },
+  //GENEROSITY: { multi: 100, title: "Generosity" },
 	THE_DEVOURING_DIADEM: { reduced: 20, type: "HELM", title: "The Devouring Diadem"},
-    AULS_UPRISING: { reduced: 100, title: "Aul's Uprising", special: true, description: "Makes random aura cost no mana. For purposes of this calculator, it makes everything in the aura group reserve nothing, and you can only select one aura (the amulet doesn't have a socket - so the aura gem would be elsewhere)" },
-    CIRCLE: { reduced: 40, special: true, title: "Circle of ...", description: "Reduces mana reservation of random herald. Item has reduced mana roll but I assume you got 40%." },
-    ESSENCE_WORM: { multi: 0, type: "RING", title: "Essence Worm", special: true, description: "Socketed aura will have no mana reservation cost, but increases global mana reservation costs by 40% for each ring" },
-    HERETICS_VEIL: { reduced: 12, type: "HELM", title: "Heretic's Veil", special: true, description: "Reduced mana multiplier only applies to Blasphemy curses" },
-    MARCH_OF_LEGION: { reduced: 0, type: "BOOTS", special: true, title: "March of the Legion", special: true, description: "Supports auras socketed in this item with Blessing support, which makes auras temporary, but still reserves mana for a fraction of time. For the purposes of this calculator, it takes your most expensive aura and sets it as ephemeral" },
-    THE_COVENANT: { reduced: 0, type: "CHEST", title: "The Covenant", bloodMagic: true }
+  AULS_UPRISING: { reduced: 100, title: "Aul's Uprising", special: true, description: "Makes random aura cost no mana. For purposes of this calculator, it makes everything in the aura group reserve nothing, and you can only select one aura (the amulet doesn't have a socket - so the aura gem would be elsewhere)" },
+  CIRCLE: { reduced: 40, special: true, title: "Circle of ...", description: "Reduces mana reservation of random herald. Item has reduced mana roll but I assume you got 40%." },
+  ESSENCE_WORM: { multi: 0, type: "RING", title: "Essence Worm", special: true, description: "Socketed aura will have no mana reservation cost, but increases global mana reservation costs by 40% for each ring" },
+  HERETICS_VEIL: { reduced: 12, type: "HELM", title: "Heretic's Veil", special: true, description: "Reduced mana multiplier only applies to Blasphemy curses" },
+  MARCH_OF_LEGION: { reduced: 0, type: "BOOTS", special: true, title: "March of the Legion", special: true, description: "Supports auras socketed in this item with Blessing support, which makes auras temporary, but still reserves mana for a fraction of time. For the purposes of this calculator, it takes your most expensive aura and sets it as ephemeral" },
+  THE_COVENANT: { reduced: 0, type: "CHEST", title: "The Covenant", bloodMagic: true }
 
 }
 
 var globalItem = [{
-    BLOOD_MAGIC: { multi: 100, title: "Blood Magic", bloodMagic: true },
-    MORTAL_CONVICTION: { reduced: 100, special: true, disabled: "!settings['BLOOD_MAGIC']", title: "Mortal Conviction", bloodMagic: true, description: "Allows you to have one non-banner aura, which is free" },
-    EGO: { less: -50, title: "Supreme Ego" },
-    INPIRATIONAL: { reduced: 100, special: true,  title: "Inpirational", description: "From the Champion Ascendancy, makes banner skills free" },
-    MASTERMIND_DISCORD: { reduced: 25, title: "Mastermind of Discord", special: true, description: "From the Elementalist Ascendancy, only applies to heralds" },
-    SANCTUARY_OF_THOUGHT: { less: 10, title: "Sanctuary of Thought", description: "From the Hierophant Ascendancy" },
+  BLOOD_MAGIC: { multi: 100, title: "Blood Magic", bloodMagic: true },
+  MORTAL_CONVICTION: { reduced: 100, special: true, disabled: "!settings['BLOOD_MAGIC']", title: "Mortal Conviction", bloodMagic: true, description: "Allows you to have one non-banner aura, which is free" },
+  EGO: { less: -50, title: "Supreme Ego" },
+  INPIRATIONAL: { reduced: 100, special: true,  title: "Inpirational", description: "From the Champion Ascendancy, makes banner skills free" },
+  MASTERMIND_DISCORD: { reduced: 25, title: "Mastermind of Discord", special: true, description: "From the Elementalist Ascendancy, only applies to heralds" },
+  SANCTUARY_OF_THOUGHT: { less: 10, title: "Sanctuary of Thought", description: "From the Hierophant Ascendancy" },
   }, {
 	PURE_MIGHT: { reduced: 30, title: "Pure Might", special: true, description: "30% Reduced reservation of Purity of Fire"},
 	PURE_GUILE: { reduced: 30, title: "Pure Guile", special: true, description: "30% Reduced reservation of Purity of Ice"},
@@ -384,23 +384,23 @@ var globalItem = [{
 
 	MASTER_COMMAND: { reduced: 50, title: "Master of Command", special: true, description: "50% Reduced reservation of Banners"},
   }, {
-    ALPHAS_HOWL: { reduced: 8, type: "HELM", title: "Alpha's Howl" },
+  ALPHAS_HOWL: { reduced: 8, type: "HELM", title: "Alpha's Howl" },
 	MASK_TRIBUNAL: { reduced: 0, special: true, type: "HELM", title: "Mask of the Tribunal", description: "Adds 1% reduced mana per 250 to all stats. Add the number manually to reduced mana field"},
 	MEMORY_VAULT: { reduced: -10, type: "HELM", title: "Memory Vault" },
 	RARE_RMR: { reduced: 5, type: "HELM", title: "Rare 5% redcued" },
 	RARE_DBL_RMR: { reduced: 10, type: "HELM", title: "Rare 10% reduced" },
   }, {
-    CONQUERORS: { reduced: 2, title: "Conqueror's Efficiency" },
+  CONQUERORS: { reduced: 2, title: "Conqueror's Efficiency" },
   }, {
 	IMPRESENCE: { reduced: 100, type: "AMULET", special: true, title: "Impresence", description: "For the purposes of this calculator, it will set your first blasphemy aura to have 100% reduced reservation" },
-    HYRRI: { reduced: 50, title: "Hyrri's Truth", special: true, description: "Precision aura cost is halved" },
-    SKYFORTH: { reduced: 6, type: "BOOTS", title: "Skyforth" },
-    SAQAWALS_NEST: { reduced: 10, type: "CHEST", title: "Saqawal's Nest", description: "Item has reduced mana roll range of 6 to 10, but for the purposes of this calculator I assume you got a maxed roll" },
-    CALAMITY: { setTo: 45, type: "CHEST", title: "The Coming Calamity", special: true, description: "All hearlds are always set to 45% reservation" },
-    PERFECT_FORM: { reduced: 100, type: "CHEST", title: "The Perfect Form", special: true, description: "Gives arctic armour 100% reduced reservation" }
+  HYRRI: { reduced: 50, title: "Hyrri's Truth", special: true, description: "Precision aura cost is halved" },
+  SKYFORTH: { reduced: 6, type: "BOOTS", title: "Skyforth" },
+  SAQAWALS_NEST: { reduced: 10, type: "CHEST", title: "Saqawal's Nest", description: "Item has reduced mana roll range of 6 to 10, but for the purposes of this calculator I assume you got a maxed roll" },
+  CALAMITY: { setTo: 45, type: "CHEST", title: "The Coming Calamity", special: true, description: "All hearlds are always set to 45% reservation" },
+  PERFECT_FORM: { reduced: 100, type: "CHEST", title: "The Perfect Form", special: true, description: "Gives arctic armour 100% reduced reservation" }
   }, {
-    ICHIMONJI: { reduced: 5, type: "1HAND", title: "Ichimonji" },
-    ICHIMONJI2: { reduced: 5, type: "1HAND", title: "Ichimonji x2", disabled: "!settings['ICHIMONJI']"  },
+  ICHIMONJI: { reduced: 5, type: "1HAND", title: "Ichimonji" },
+  ICHIMONJI2: { reduced: 5, type: "1HAND", title: "Ichimonji x2", disabled: "!settings['ICHIMONJI']"  },
   }
 ]
 
