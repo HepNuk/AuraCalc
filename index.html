@@ -42,6 +42,70 @@
 		<div class="cb"></div>
 		<form id="p" action="#" onsubmit="return false">
 			<input type="hidden" name="auras" value="1">
+			<section id="info" class="row">
+				<h3>
+					<span>Change Logs</span>
+					<button type="button" class="btn btn-info btn-sm fr ml" ng-click="showSettings = !showSettings">Toggle</button>
+				</h3>
+				<div class="cb"></div>
+				<div ng-show="showSettings">
+					<div class="col-md-12 class mb">
+						<strong>26th Sept 2020</strong>
+						<div class="innerlog">
+							<u><strong>Major Fixes:</strong></u>
+							<br>- Blasphemy bug was fixed, they are now fully fixed and functional.
+							<br><br>
+							<u><strong>Added:</strong></u>
+							<br>- Maim Support Gem in Loval Groupes.
+							<br>- Support for New Herald Reservation nodes on the tree (2 Small Nodes and Discord Artisan)
+							<br><br>
+							<u><strong>Changed:</strong></u>
+							<br>- Circle of XYZ is now an inputed Reduced Mana Reserved. (Was a locked 40%)
+							<br><br>
+							<u><strong>Removed:</strong></u>
+							<br>- Ascendancy Bonuses. (This was pointless since Calc does not know your aura efffect for each aura.)
+						</div>
+					</div>
+					<div class="col-md-12 class mb">
+						<strong>25th Sept 2020</strong>
+						<div class="innerlog">
+							<u><strong>Added:</strong></u>
+							<br>- Support for Cluster Reservation Notables: Pure Guile, Aptitude, Might, Self-Control, Sublime Form, Uncompromising, Master of Command <br>(Currently cannot stack multiple of same notables)
+							<br>- Bandaide fix for Blasphemies not calculating properly on globa.
+							<br>- Larger Encoding possible now.
+							<br><br>
+							<u><strong>Changed:</strong></u>
+							<br>- Order and grouping of Skills, Items and Options. (now more logical)
+						</div>
+					</div>
+					<div class="col-md-12 class mb">
+						<strong>24th Sept 2020</strong>
+						<div class="innerlog">
+							<u><strong>Added:</strong></u>
+							<br>- Support for 10% and 15% Redcued mana reserved Shields
+							<br>- Support for Amulet and Jewel Reduced Mana.
+							<br>- Support for Vivinsect Ring.
+							<br>- Support for Skitterbots
+							<br>- Support for Awakened Blasphemy (Currently Assumes it's Level 5/6)
+							<br><br>
+							<u><strong>Changed:</strong></u>
+							<br>- Reduced Mana from Tree now capped at 100 (was 60)
+							<br>- Vitality Reservation to Flat Cost per level (was 35% at all levels)
+							<br>- Displayed Order of Auras, now paired logicaly (was ordered alphabetically)
+							<br>- Changed Aspect to be either on or off (was 0 to 4) (You can only have 1 aspect on anyways)
+							<u><strong>Changed:</strong></u>
+							<br><br>
+							<u><strong>Removed:</strong></u>
+							<br>- Midnight Bargain (Free up some encoding slots this will be readded later on)
+							<br>- Removed Generosity (This served no purposes)
+						</div>
+					</div>
+					<div class="col-md-12">
+						<i class="fa fa-info-circle"></i> Updated for PoE Patch 3.12.2
+					</div>
+					<div class="cb pt"></div>
+				</div>
+			</section>
 			<section ng-repeat="index in auraGroups" id="aura_1" class="row aura-grp">
 				<h3>
 					<span>Aura Group {{index + 1}}</span>
@@ -119,56 +183,6 @@
 				</div>
 
 				<div class="cb pt"></div>
-			</section>
-			<section id="info" class="row">
-				<h3>
-					<span>Ascendancy Bonuses</span>
-					<button type="button" class="btn btn-info btn-sm fr ml" ng-click="showSettings = !showSettings">Toggle</button>
-				</h3>
-				<div class="cb"></div>
-				<div ng-show="showSettings">
-					<div class="col-md-12 class mb">
-						<div class="inner">
-							<img src="img/ascendant.png" class="fl" />
-							<h4><a href="https://pathofexile.gamepedia.com/Ascendant" target="_blank">Ascendant</a><br /></h4>
-							<strong>Guardian:</strong>
-							<abbr title="1% physical reduction for each aura active"><span class="guardian_physreduction">{{ totalAuras * 1 }}</span>% physical damage reduction</abbr>
-							to you and nearby allies<br />
-							<strong>Necromancer:</strong>
-							<abbr title="3% for each aura active">+<span class="necromancer_speed">{{ totalAuras * 3 }}</span>% increased attack and cast speed</abbr>
-							to you and allies
-						</div>
-					</div>
-					<div class="col-md-12 class mb">
-						<div class="inner">
-							<img src="img/guardian.png" class="fl" />
-							<h4><a href="http://pathofexile.gamepedia.com/Guardian" target="_blank">Guardian</a><br /></h4>
-							<strong>Radiant Faith:</strong>
-							<abbr title="Based upon 160% of your reserved life">+<span class="guardian_armour">{{ Math.round(lifeReservedNumeric * 1.6) }}</span> armour</abbr> and
-							<abbr title="Based upon 15% of your reserved mana">+<span class="guardian_es">{{ Math.round(manaReservedNumeric * .15) }}</span> maximum energy shield</abbr>
-							to you and nearby allies<br />
-							<strong>Unwavering Faith:</strong>
-							<abbr title="1% physical reduction for each aura active"><span class="guardian_physreduction">{{ totalAuras * 1 }}</span>% physical damage reduction</abbr> and
-							<abbr title="0.2% life regen for each aura active"><span class="guardian_liferegen">{{ (totalAuras * .2).toFixed(1) }}</span>% maximum life regenerated per second</abbr>
-							to you and nearby allies
-						</div>
-					</div>
-					<div class="col-md-12 class mb">
-						<div class="inner">
-							<img src="img/necro.png" class="fl" />
-							<h4><a href="http://pathofexile.gamepedia.com/Necromancer" target="_blank">Necromancer</a><br /></h4>
-							<strong>Commander of Darkness:</strong>
-							<abbr title="3% for each aura active">+<span class="necromancer_speed">{{ totalAuras * 3 }}</span>% increased attack and cast speed</abbr>
-							to you and allies
-						</div>
-					</div>
-					<div class="col-md-12">
-						<i class="fa fa-info-circle"></i> The numbers above are raw and do not reflect any changes through aura or buff effectiveness increases.
-						<br />
-						<i class="fa fa-info-circle"></i> Buffs that reserve mana like the heralds and arctic armour are not technically classified as auras for ascendancy calculations.
-					</div>
-					<div class="cb pt"></div>
-				</div>
 			</section>
 		</form>
     <ins class="adsbygoogle"
