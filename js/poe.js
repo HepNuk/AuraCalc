@@ -63,6 +63,7 @@ var aurasEncode = [
 var settingsEncode = [
   // add new things up here
   [
+    ['HYRRI_REPLICA', 1],
     ['PERFECT_FORM_REPLICA', 1],
     ['DISCORD_ARTISAN', 1],
     ['HERALD_RMR2', 1],
@@ -273,6 +274,20 @@ var wrathCalc = function(pl) {
 }
 
 /*
+  Hatred
+
+  Replica Hyrri's causes hatred to have 50% Less reservation
+*/
+var hatredCalc = function(pl) {
+  const glm = [...pl.globalLessMana]
+  if(pl.rootScope.settings['HYRRI_REPLICA']) {
+    glm.push(50)
+  }
+  let cost = pl.rootScope.AURAS[pl.aura].cost || 0
+  return calculateAura(cost, pl.localReducedMana, glm, pl.localMutliplier, true)
+}
+
+/*
   Precision
 
   Has 50%less Reservation with Hyrri's
@@ -374,7 +389,7 @@ var graceCalc = function(pl) {
 
 var globalAura = {
 	ANGER: { cost: 50, aura: true, title: "Anger" },
-	HATRED: { cost: 50, aura: true, title: "Hatred" },
+	HATRED: { cost: 50, aura: true, title: "Hatred", override: hatredCalc },
 	WRATH: { cost: 50, aura: true, title: "Wrath", override: wrathCalc },
 
 	HASTE: { cost: 50, aura: true, title: "Haste" },
@@ -482,12 +497,14 @@ var globalItem = [{
   }, {
 	IMPRESENCE: { reduced: 100, type: "AMULET", special: true, title: "Impresence", description: "For the purposes of this calculator, it will set your first blasphemy aura to have 100% reduced reservation" },
   HYRRI: { reduced: 50, title: "Hyrri's Truth", special: true, description: "Precision aura cost is halved" },
-  SKYFORTH: { reduced: 6, type: "BOOTS", title: "Skyforth" },
+  HYRRI_REPLICA: { reduced: 50, title: "Replica Hyrri's Truth", special: true, description: "Harted aura cost is halved" },
 
   SAQAWALS_NEST: { reduced: 10, type: "CHEST", title: "Saqawal's Nest", description: "Item has reduced mana roll range of 6 to 10, but for the purposes of this calculator I assume you got a maxed roll" },
   PERFECT_FORM: { reduced: 100, type: "CHEST", title: "The Perfect Form", special: true, description: "Gives arctic armour 100% reduced reservation" },
   PERFECT_FORM_REPLICA: { reduced: 100, type: "CHEST", title: "Replica Perfect Form", special: true, description: "Gives Flesh and stone 100% reduced reservation" },
-  CALAMITY: { setTo: 45, type: "CHEST", title: "The Coming Calamity", special: true, description: "All hearlds are always set to 45% reservation" }
+
+  CALAMITY: { setTo: 45, type: "CHEST", title: "The Coming Calamity", special: true, description: "All hearlds are always set to 45% reservation" },
+  SKYFORTH: { reduced: 6, type: "BOOTS", title: "Skyforth" }
   }, {
   ICHIMONJI: { reduced: 5, type: "1HAND", title: "Ichimonji" },
   ICHIMONJI2: { reduced: 5, type: "1HAND", title: "Ichimonji x2", disabled: "!settings['ICHIMONJI']"  },
