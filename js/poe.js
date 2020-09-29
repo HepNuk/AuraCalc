@@ -162,7 +162,7 @@ var calculateAura = function(aura, reducedMana = 0, lessMana = [], multiplier = 
  */
 var aspectCalc = function(pl){
 
-  var localReducedMana = 0
+
   var localMultiMana = pl.localMutliplier
 
   if (pl.rootScope.itemGroup['ENLIGHTEN'][pl.auraGroup]){
@@ -171,7 +171,7 @@ var aspectCalc = function(pl){
 
   }
 
-  return calculateAura(pl.rootScope.AURAS[pl.aura].cost, localReducedMana, pl.globalLessMana, localMultiMana)
+  return calculateAura(pl.rootScope.AURAS[pl.aura].cost, pl.localReducedMana, pl.globalLessMana, localMultiMana)
 }
 
 /*
